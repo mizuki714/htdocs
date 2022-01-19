@@ -32,7 +32,6 @@
 main,header,nav,body,footer {
     max-width: 1000px;
     margin: auto;
-    padding: auto;
 }
 
 /********************************************header***************************************************/

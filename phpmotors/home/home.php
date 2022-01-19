@@ -1,5 +1,4 @@
-
-<?php include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/common/headerhome.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/common/header.php'; ?>
 
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/common/navigation.php'; ?>
 
@@ -9,11 +8,11 @@
         <section class="hero-text" onclick="window.location.href='home.php'">
             <h2>DMC Delorean</h2>
             <h3>3 cup holders<br>Superman Doors<br>Fuzzy Dice!</h3>
-            <img class="OwnTodayButton" src="/phpmotors/images/site/own_today.png" alt="Own Today Button">
+            <img class="OwnTodayButton" src="../images/site/own_today.png" alt="Own Today Button">
         </section>
         <picture class="hero-picture">
-            <source srcset="/phpmotors/images/delorean.jpg" media="(min-width:50rem)">
-            <img class="hero-img" src="/phpmotors/images/delorean.jpg" alt="Image of a Delorean">
+            <source srcset="../images/delorean.jpg" media="(min-width:50rem">
+            <img class="hero-img" src="../images/delorean.jpg" alt="Image of a Delorean">
         </picture>
     </section>
 </div>
@@ -21,19 +20,19 @@
 <section class="upgrades">
     <h4>Delorean Upgrades</h4>
     <div class="upgrade1">
-        <img class="FluxCapacitorimg" src="/phpmotors/images/upgrades/flux-cap.png" alt="Image of a Flux Capacitor for a Delorean">
+        <img class="FluxCapacitorimg" src="../images/upgrades/flux-cap.png" alt="Image of a Flux Capacitor for a Delorean">
         <h5 class="FluxCapacitor">Flux Capacitor</h5>
     </div>
     <div class="upgrade2">
-        <img class="FlameDetailsimg" src="/phpmotors/images/upgrades/flame.jpg" alt="Image of a Flame">
+        <img class="FlameDetailsimg" src="../images/upgrades/flame.jpg" alt="Image of a Flame">
         <h5 class="FlameDetails">Flame Details</h5>
     </div>
     <div class="upgrade3">
-        <img class="bumperstickerimg" src="/phpmotors/images/upgrades/bumper_sticker.jpg" alt="Image of a bumper sticker">
+        <img class="bumperstickerimg" src="../images/upgrades/bumper_sticker.jpg" alt="Image of a bumper sticker">
         <h5 class="BumperStickers">Bumper Stickers</h5>
     </div>
     <div class="upgrade4">
-        <img class="hubcapimg" src="/phpmotors/images/upgrades/hub-cap.jpg" alt="Image of a Hub Cap">
+        <img class="hubcapimg" src="../images/upgrades/hub-cap.jpg" alt="Image of a Hub Cap">
         <h5 class="HubCaps">Hub Caps</h5>
     </div>
 </section>
