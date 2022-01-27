@@ -1,8 +1,8 @@
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/common/header.php'; ?>
- 
-<?php include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/common/navigation.php'; ?>
-
-
+<nav>
+ <?php echo $navList; ?>
+ </nav>
+ <main>
 <h1> Welcome to PHP Motors!</h1>
 <div class="herocontainer">
     <section class="hero">

@@ -1,7 +1,7 @@
 WebFont.load({
     google: {
         families: [
-            'Libre Baskerville', 'Roboto'
+            'Roboto', 'Source Sans Pro'
         ]
     }
 });

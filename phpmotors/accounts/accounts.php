@@ -4,13 +4,13 @@
 
 
 // Get the database connection file
- require_once '../library/connections.php';
+require_once '../library/connections.php';
 // Get the PHP Motors model for use as needed
- require_once '../model/main-model.php';
+require_once '../model/main-model.php';
 
 
- // Get the array of classifications
- $classifications = getClassifications();
+// Get the array of classifications
+$classifications = getClassifications();
 
 //Demo to see if the array of classifications is functional (it is)
 // var_dump($classifications);
@@ -20,7 +20,7 @@
 $navList = '<ul>';
 $navList .= "<li><a href='/phpmotors/index.php' title='View the PHP Motors home page'>Home</a></li>";
 foreach ($classifications as $classification) {
-   $navList .= "<li><a href='/phpmotors/index.php?action=".urlencode($classification['classificationName'])."' title='View our $classification[classificationName] product line'>$classification[classificationName]</a></li>";
+   $navList .= "<li><a href='/phpmotors/index.php?action=" . urlencode($classification['classificationName']) . "' title='View our $classification[classificationName] product line'>$classification[classificationName]</a></li>";
 }
 $navList .= '</ul>';
 
@@ -29,20 +29,24 @@ $navList .= '</ul>';
 //exit;
 
 //Accounts Controller
- $action = filter_input(INPUT_POST, 'action');
-if ($action == NULL){
- $action = filter_input(INPUT_GET, 'action');
+$action = filter_input(INPUT_POST, 'action');
+if ($action == NULL) {
+   $action = filter_input(INPUT_GET, 'action');
+
+   //this is where the form stuff is located
+   $firstName = filter_input(INPUT_POST, 'firstName');
+   $lastName = filter_input(INPUT_POST, 'lastName');
+   $email = filter_input(INPUT_POST, 'email');
+   $password = filter_input(INPUT_POST, 'password');
 }
 
 switch ($action) {
-   case '':
-  
-   break;
+   case 'login':
+      include '../view/login.php';
+      break;
+   case 'registration':
+      include '../view/registration.php';
+      break;
    default:
-  
-   break;
-  }
-  
-
- 
-?>
+      break;
+}
