@@ -23,15 +23,17 @@
         <h1> Vehicle Management</h1>
         <div class="vman">
             <div class="addclass">
-            <ul>
-                <!--A link to the controller that will trigger the delivery of the add classification view. -->
-                <li>
-                    <a href="?action=add-class">Add Classification</a>
-                </li>
+                <ul>
+                    <!--A link to the controller that will trigger the delivery of the add classification view. -->
+                    <li>
+                        <a href="?action=add-class">Add Classification</a>
+                    </li>
+                </ul>
             </div>
             <div class="addcar">
-                <!--A link to the controller that will trigger the delivery of the add vehicle view. -->
-                <li><a href="?action=add-vehicle">Add Vehicle</a></li>
+                <ul>
+                    <!--A link to the controller that will trigger the delivery of the add vehicle view. -->
+                    <li><a href="?action=add-vehicle">Add Vehicle</a></li>
                 </ul>
             </div>
         </div>
