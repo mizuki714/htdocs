@@ -6,8 +6,9 @@
 function getClassifications(){
     // Creates a connection object from the phpmotors connection function
     $db = phpmotorsConnect(); 
-    // The SQL statement to be used with the database 
-    $sql = 'SELECT classificationName FROM carclassification ORDER BY classificationName ASC'; 
+    /* The SQL statement to be used with the database 
+    alter the existing getClassifications() function to also select the classificationId from the database and use it in building the drop-down select list.*/
+    $sql = 'SELECT classificationName, classificationId FROM carclassification ORDER BY classificationName ASC'; 
     // creates the prepared statement using the phpmotors connection      
     $stmt = $db->prepare($sql);
     // runs the prepared statement 
@@ -21,4 +22,3 @@ function getClassifications(){
     // was called (the controller) 
     return $classifications;
    }
-?>

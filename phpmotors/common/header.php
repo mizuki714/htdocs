@@ -10,12 +10,14 @@
     <link rel="stylesheet" href="/phpmotors/css/small.css" media="screen">
     <link rel="stylesheet" href="/phpmotors/css/medium.css" media="screen">
     <link rel="stylesheet" href="/phpmotors/css/large.css" media="screen">
+
+    
     <title> PHP Motors | Home </title>
 </head>
 <body>
     <header>
         <!--- logo site name motto-->
         <img class="logo" src="/phpmotors/images/site/logo.png" alt="PHP Motors logo">
-            <h1 id="actlink"><a class="alink" href="/phpmotors/accounts/accounts.php?action=login">My Account</a></h1>
+            <h1 id="actlink"><a class="alink" href="/phpmotors/accounts/index.php?action=login">My Account</a></h1>
     </header>
     

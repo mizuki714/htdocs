@@ -9,7 +9,7 @@ h5 {
 
 p,
 a {
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: 'VT323', monospace;
 }
 
 /*****************************FORM************************************/
@@ -79,6 +79,7 @@ nav ul {
 * {
     box-sizing: border-box;
     text-decoration: none;
+    list-style-type: none;
 }
 
 nav button {
@@ -199,4 +200,18 @@ img.bumperstickerimg,
 img.FluxCapacitorimg,
 img.FlameDetailsimg {
     margin: auto;
+}
+/****************** Vehicle Classification *****************/
+.vman, .vman a{
+    text-decoration: none;
+    list-style-type: none;  
+    color:#3a3a3a;
+    font-family: 'VT323', monospace;
+    font-size:large;
+}
+.addclass, .addcar{
+    padding: 1em;
+    margin: 1.5em;
+    background-color: #4c96d7;
+    text-align: center;
 }

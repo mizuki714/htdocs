@@ -13,13 +13,13 @@
     <title> PHP Motors | TITLE </title>
 </head>
 <body>
-<?php include $_SERVER['DOCUMENT_ROOT'] . '\phpmotors\common\header.php';?>
+<?php include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/common/header.php';?>
 <nav>
  <?php echo $navList; ?>
  </nav>
  <main>
 <h1> Content Title Here</h1>
-<?php include $_SERVER['DOCUMENT_ROOT'] . '\phpmotors\common\footer.php';?>
+<?php include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/common/footer.php';?>
 
     
     
