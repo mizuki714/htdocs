@@ -42,7 +42,7 @@
             <h4>DMC Delorean Reviews</h4>
             <ul>
                 <li>
-                    <p>"So fast it's almost lke traveling in time." (4/5)</p>
+                    <p>"So fast it's almost like traveling in time." (4/5)</p>
                 </li>
                 <li>
                     <p>"Coolest ride on the road."(4/5)</p>
