@@ -8,12 +8,16 @@ require_once '../library/connections.php';
 require_once '../model/main-model.php';
 //Get the vehicle model file
 require_once '../model/vehicles-model.php';
+// Get the accounts model
+require_once '../model/accounts-model.php';
+// Get the functions file
+require_once '../library/functions.php';
 
 //Get the array of classifications from DB using model
 $classifications = getClassifications();
 
 // Build a navigation bar using the $classifications array
-$navList = '<ul>';
+/*$navList = '<ul>';
 $navList .= "<li><a href='/phpmotors/index.php' title='View the PHP Motors home page'>Home</a></li>";
 foreach ($classifications as $classification) {
  $navList .= "<li><a href='/phpmotors/index.php?action=".urlencode($classification['classificationName'])."' title='View our $classification[classificationName] product line'>$classification[classificationName]</a></li>";
@@ -21,6 +25,11 @@ foreach ($classifications as $classification) {
 $navList .= '</ul>';
 //echo $navList;
 //exit;
+*/
+
+//nav bar
+$navList = getNavList($classifications);
+
 
 $action = filter_input(INPUT_POST, 'action');
  if ($action == NULL){
@@ -29,6 +38,8 @@ $action = filter_input(INPUT_POST, 'action');
 
  switch ($action){   
     case 'add-vehicle':
+      
+      
       include '../view/add-vehicle.php';
       break;
 
@@ -46,20 +57,35 @@ $action = filter_input(INPUT_POST, 'action');
       break;
 
     case 'add-vehicle-form':
-        $class = $_POST['log_class'];
-        $make = $_POST['log_make'];
-        $model = $_POST['log_model'];
-        $description = $_POST['log_description'];
-        $image = $_POST['log_image'];
-        $thumbnail = $_POST['log_thumbnail'];
-        $price = $_POST['log_price'];
-        $stock = $_POST['log_stock'];
-        $color = $_POST['log_color'];
-        if (empty($make)||empty($model)||empty($description)||empty($image)||empty($thumbnail)||empty($price)||empty($stock)||empty($color)){
+
+      //filter and store data 
+      $classificationId = trim(filter_input (INPUT_POST,'classificationId', FILTER_SANITIZE_STRING));
+      $invMake = trim(filter_input (INPUT_POST, 'invMake', FILTER_SANITIZE_STRING));
+      $invModel = trim(filter_input (INPUT_POST, 'invModel', FILTER_SANITIZE_STRING));
+      $invDescription = trim(filter_input(INPUT_POST, 'invDescription', FILTER_SANITIZE_STRING));
+      $invImage = trim(filter_input(INPUT_POST, 'invImage', FILTER_SANITIZE_STRING));
+      $invThumbnail = trim(filter_input(INPUT_POST, 'invThumbnail', FILTER_SANITIZE_STRING));
+      $invPrice =trim( filter_input(INPUT_POST, 'invPrice', FILTER_SANITIZE_STRING,FILTER_FLAG_ALLOW_FRACTION ));
+      $invStock = trim(filter_input(INPUT_POST, 'invStock', FILTER_SANITIZE_STRING));
+      $invColor = trim(filter_input(INPUT_POST, 'invColor', FILTER_SANITIZE_STRING));
+      
+
+      //idk if this is useful anymore or not so it stays for now but hopefully i fixed it
+        $class = $_POST['classificationId'];
+        $make = $_POST['invMake'];
+        $model = $_POST['invModel'];
+        $description = $_POST['invDescription'];
+        $image = $_POST['invImage'];
+        $thumbnail = $_POST['invThumbnail'];
+        $price = $_POST['invPrice'];
+        $stock = $_POST['invStock'];
+        $color = $_POST['invColor'];
+        
+        if (empty($invMake)||empty($invModel)||empty($invDescription)||empty($invImage)||empty($invThumbnail)||empty($invPrice)||empty($invStock)||empty($invColor)){
             $message = "Form not complete. Please fill in all fields.";
         }
         else{
-            addNewVehicle($class, $make, $model, $description, "/phpmotors/images/no-image.png", "/phpmotors/images/no-image.png", $price, $stock, $color);
+            addNewVehicle($classificationId, $invMake, $invModel, $invDescription, "/phpmotors/images/no-image.png", "/phpmotors/images/no-image.png", $invPrice, $invStock, $invColor);
             $message = "Form submission successful.";
     }
         include '../view/add-vehicle.php';

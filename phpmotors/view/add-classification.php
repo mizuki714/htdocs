@@ -29,10 +29,11 @@
         <form method="post" action="/phpmotors/vehicles/">
             <fieldset>
                 <label for="class-name">Classification Name</label></br>
-                <input type="text" placeholder="Enter Car Classification Here" name="classificationName" id="classificationName" <?php if (isset($classificationName)) {
-
-                                                                                                                                        echo "value='$classificationName'";
-                                                                                                                                    }  ?> required><br><br>
+                <input type="text" placeholder="Enter Car Classification Here" name="classificationName" id="classificationName" max='30' <?php if (isset($invModel)) {
+                                                                                                                                                echo "value='$invModel'";
+                                                                                                                                            }  ?><?php if (isset($classificationName)) {
+                                                                                                            echo "value='$classificationName'";
+                                                                                                        }  ?> required><br><br>
                 <button type="submit">Add Classification</button>
                 <input type="hidden" name="action" value="add-classfication">
             </fieldset>
