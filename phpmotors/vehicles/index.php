@@ -91,6 +91,7 @@ $action = filter_input(INPUT_POST, 'action');
         include '../view/add-vehicle.php';
         break;
     default:
+    $classificationList = buildClassificationList($classifications);
       include '../view/vehicle-management.php';
    }
    ?>

@@ -40,11 +40,11 @@
         }
         ?>
         <h1>Add Vehicle</h1>
-        <form method="post" action="/phpmotors/vehicles/">
+        <form method="post" action="/phpmotors/vehicles/index.php">
             <fieldset>
                 <label for="class">Classification</label></br>
 
-
+                <?php echo $classificationList; ?>
                 <!--comment out maybe idk 
                     <?php /*
                 $classifications = getClassifications();
