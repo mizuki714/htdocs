@@ -38,6 +38,8 @@ function buildClassificationList($classifications){
    } 
    $classificationList .= '</select>'; 
    return $classificationList; 
+   
   }
+
 
 ?>

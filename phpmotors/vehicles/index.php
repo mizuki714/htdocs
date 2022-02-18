@@ -48,10 +48,35 @@ $action = filter_input(INPUT_POST, 'action');
       break;
 
     case 'add-classfication':
+      // Get data from forms
+      $classificationName = trim(filter_input(INPUT_POST, 'classificationName', FILTER_SANITIZE_STRING));
+
+      // Check for missing data
+      if(empty($classificationName)){
+        $message = '<p class="warning" >Please provide information for all empty form fields.</p>';
+        include '../view/add-classification.php';
+        exit; 
+        }
+
+        // Send the data to the model
+        $regOutcome = addclass($classificationName);
+
+        // Check and report the result
+        if($regOutcome === 1){
+        $message = "<p class='success' >The new car $classificationName classification was succesfully added!</p>";
+        include '../view/add-classification.php';
+        exit;
+     } else {
+        $message = "<p class='warning' >Sorry the car $classificationName classification failed to be added </p>";
+        include '../view/add-classification.php';
+        exit;
+     }
+//old code
+        /*
         if (addclass($_POST['classificationName']))
         header("Location: index.php");
         else
-        $message = "Failure to add classification";
+        $message = "Failure to add classification";*/
    
     include '../view/classification.php';
       break;
@@ -81,7 +106,7 @@ $action = filter_input(INPUT_POST, 'action');
         $stock = $_POST['invStock'];
         $color = $_POST['invColor'];
         
-        if (empty($invMake)||empty($invModel)||empty($invDescription)||empty($invImage)||empty($invThumbnail)||empty($invPrice)||empty($invStock)||empty($invColor)){
+        if (empty($classificationId)||empty($invMake)||empty($invModel)||empty($invDescription)||empty($invImage)||empty($invThumbnail)||empty($invPrice)||empty($invStock)||empty($invColor)){
             $message = "Form not complete. Please fill in all fields.";
         }
         else{

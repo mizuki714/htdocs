@@ -1,4 +1,7 @@
+<?php include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/common/doctype.php'; ?>
+<title> PHP Motors | Home </title>
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/common/header.php'; ?>
+
 <nav>
     <?php echo $navList; ?>
 </nav>
