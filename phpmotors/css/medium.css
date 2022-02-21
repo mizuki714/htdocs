@@ -6,7 +6,6 @@
     nav ul li {
         flex: 1 1 90%;
     }
-    
     nav ul.hide_navigation,
     nav ul {
         display: flex;
@@ -18,11 +17,21 @@
     } 
      
 
-    header a.myaccount{
-        text-align: right;
-        font-size: 2rem;
+    #header{
+        display:grid;
+        grid-template-columns: 1fr 1fr 1fr;
     }
- 
+    
+    h5{
+        align-items:center;
+        text-align: center;
+    }
+    a.myaccount{
+       grid-column: 3/4;
+    }
+    img.logo{
+        grid-column: 1/2;
+    }
     /******************************************html********************************************************/
     html{
         margin:2em;

@@ -22,17 +22,29 @@ a {
 }
 
 /**********************************Header*****************************************/
-header, header a.myaccount {
+#header, header, header a.myaccount {
     background-color: #ffff;
     padding: 1rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
     border-radius: 1em 1em;
+    justify-content: center;
+    text-align: center;
+}
+ a.myaccount, img.logo{
+    margin-left: auto;
+    margin-right: auto;
+}
+header a.myaccount{
+    font-size: 2rem;
+    
+}
+img.logo{
+    padding: 1rem;
 }
 
-
+h5{
+    align-items:center;
+    text-align: center;
+}
 
 /***********************************************NAV*******************************************************/
 nav {
