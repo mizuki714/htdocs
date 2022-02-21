@@ -15,12 +15,14 @@
     nav ul li a {
         border: none;
         border-right: 1px solid rgba(0, 0, 0, 0.3);
-    }
-    
-    header {
-        text-align: left;
-    }
+    } 
+     
 
+    header a.myaccount{
+        text-align: right;
+        font-size: 2rem;
+    }
+ 
     /******************************************html********************************************************/
     html{
         margin:2em;

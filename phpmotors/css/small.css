@@ -22,7 +22,7 @@ a {
 }
 
 /**********************************Header*****************************************/
-header {
+header, header a.myaccount {
     background-color: #ffff;
     padding: 1rem;
     display: flex;
@@ -32,9 +32,7 @@ header {
     border-radius: 1em 1em;
 }
 
-header h1 a.alink {
-    color: #3a3a3a;
-}
+
 
 /***********************************************NAV*******************************************************/
 nav {

@@ -40,6 +40,4 @@ function buildClassificationList($classifications){
    return $classificationList; 
    
   }
-
-
 ?>

@@ -28,3 +28,58 @@ function regClient($clientFirstname, $clientLastname, $clientEmail, $clientPassw
     // Return the indication of success (rows changed)
     return $rowsChanged;
 }
+
+// Check for an existing email address
+function checkExistingEmail($clientEmail) {
+    $db =  phpmotorsConnect();
+    //SELECT query to see if a matching email address can be found in the database table
+    $sql = 'SELECT clientEmail FROM clients WHERE clientEmail = :email';
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':email', $clientEmail, PDO::PARAM_STR);
+    $stmt->execute();
+    /*
+    * get a single row from the database using fetch()
+    * adding a parameter to the fetch of "PDO::FETCH_NUM"
+    * to indicate the want for * a simple numeric array
+    */
+    $matchEmail = $stmt->fetch(PDO::FETCH_NUM);
+    $stmt->closeCursor();
+    //If the array is empty, return a zero "0".
+   // Else If the array is not empty, return a "1".
+    
+    if(empty($matchEmail)){
+        return 0;
+       // echo 'Nothing found';
+        exit;
+       } else {
+        return 1;
+      //  echo 'Match found';
+        exit;
+       }
+       
+   }
+
+   // Get client data based on an email address
+function getClient($clientEmail){
+    $db = phpmotorsConnect();
+    $sql = 'SELECT clientId, clientFirstname, clientLastname, clientEmail, clientLevel, clientPassword FROM clients WHERE clientEmail = :clientEmail';
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':clientEmail', $clientEmail, PDO::PARAM_STR);
+    $stmt->execute();
+    $clientData = $stmt->fetch(PDO::FETCH_ASSOC);
+    $stmt->closeCursor();
+    return $clientData;
+   }
+
+   
+   function getClientInfo($clientId){
+    $db = phpmotorsConnect();
+    //select statement to get client info
+    $sql = 'SELECT * FROM clients WHERE clientId = :clientId';
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':clientId', $clientId, PDO::PARAM_INT);
+    $stmt->execute();
+    $clientData = $stmt->fetch(PDO::FETCH_ASSOC);
+    $stmt->closeCursor();
+    return $clientData;
+}
