@@ -2,6 +2,8 @@
 
 //Accounts Controller 
 
+// Create or access a Session
+session_start();
 
 // Get the database connection file
 require_once '../library/connections.php';
@@ -13,17 +15,18 @@ require_once '../model/accounts-model.php';
 require_once '../library/functions.php';
 
 
+
 // Get the array of classifications
 $classifications = getClassifications();
 
 
 //nav bar
 $navList = getNavList($classifications);
-/*
-//Demo to see if the array of classifications is functional (it is)
-// var_dump($classifications);
-//	exit;
 
+//Demo to see if the array of classifications is functional (it is)
+ //var_dump($classifications);
+ //	exit;
+/*
 // Build a navigation bar using the $classifications array
 $navList = '<ul>';
 $navList .= "<li><a href='/phpmotors/index.php' title='View the PHP Motors home page'>Home</a></li>";
@@ -45,8 +48,8 @@ if ($action == NULL) {
    //this is where the form stuff is located
    $firstName = filter_input(INPUT_POST, 'firstName');
    $lastName = filter_input(INPUT_POST, 'lastName');
-   $email = filter_input(INPUT_POST, 'email');
-   $password = filter_input(INPUT_POST, 'password');
+   $email = filter_input(INPUT_POST, 'clientEmail');
+   $password = filter_input(INPUT_POST, 'clientPassword');
 }
 
 switch ($action) {
@@ -61,7 +64,7 @@ switch ($action) {
       //added a different filter type to the input to sanitize anything out that shouldn't be there using FILTER_SANITIZE_EMAIL. surrounded each of the filter_input functions with a trim()function to remove any extra spaces before or after the values.
       $clientFirstname = trim(filter_input(INPUT_POST, 'clientFirstname', FILTER_SANITIZE_STRING));
       $clientLastname = trim(filter_input(INPUT_POST, 'clientLastname', FILTER_SANITIZE_STRING));
-      $clientEmail = trim(filter_input(INPUT_POST, 'clientEmail', FILTER_SANITIZE_STRING));
+      $clientEmail = trim(filter_input(INPUT_POST, 'clientEmail', FILTER_SANITIZE_EMAIL));
       $clientPassword = trim(filter_input(INPUT_POST, 'clientPassword', FILTER_SANITIZE_STRING));
 
       //Recreate the $clientEmail variable and assign to it what is returned from calling the checkEmail($clientEmail) function.
@@ -69,7 +72,7 @@ switch ($action) {
       $clientEmail = checkEmail($clientEmail);
       $checkPassword = checkPassword($clientPassword);
 
-       /* 
+      /* 
    * check if the email address that is being 
    * submitted already exists in the databaseIf 
    * so, we will abort the registration process
@@ -78,14 +81,14 @@ switch ($action) {
    * we then proceed with the registration normally.
    */
 
-  $existingEmail = checkExistingEmail($clientEmail);
+      $existingEmail = checkExistingEmail($clientEmail);
 
-  // Check for existing email address in the table
-  if ($existingEmail) {
-     $message = '<p class="notice">That email address already exists. Would you like to login instead?</p>';
-     include '../view/login.php';
-     exit;
-  }
+      // Check for existing email address in the table
+      if ($existingEmail) {
+         $message = '<p class="notice">That email address already exists. Would you like to login instead?</p>';
+         include '../view/login.php';
+         exit;
+      }
 
       // Check for missing data
       if (empty($clientFirstname) || empty($clientLastname) || empty($clientEmail) || empty($checkPassword)) {
@@ -101,13 +104,11 @@ switch ($action) {
       $regOutcome = regClient($clientFirstname, $clientLastname, $clientEmail, $hashedPassword);
 
 
-     
-
-
       // Check and report the result
       if ($regOutcome === 1) {
-         $message = "<p>Thanks for registering $clientFirstname. Please use your email and password to login.</p>";
-         include '../view/login.php';
+         setcookie('firstName', $clientFirstname, strtotime('+1 year'), '/');
+         $_SESSION['message'] = "Thanks for registering $clientFirstname. Please use your email and password to login.";
+         include header('Location: /phpmotors/accounts/?action=login');
          exit;
       } else {
          $message = "<p>Sorry $clientFirstname, but the registration failed. Please try again.</p>";
@@ -117,12 +118,25 @@ switch ($action) {
 
       break;
 
-   case 'Login':
-      $clientEmail = trim(filter_input(INPUT_POST, 'clientEmail', FILTER_SANITIZE_STRING));
+   case 'LOGIN':
+      //testing
+       echo "this is the LOGIN page";
+       exit;
+
+      $clientEmail = trim(filter_input(INPUT_POST, 'clientEmail', FILTER_SANITIZE_EMAIL));
+     // echo $clientEmail;
+     // exit;
+
       $clientPassword = trim(filter_input(INPUT_POST, 'clientPassword', FILTER_SANITIZE_STRING));
+
+      //testing
+     // echo  $clientPassword;
+     // echo $clientEmail;
+      //exit;
 
       $clientEmail = checkEmail($clientEmail);
       $checkPassword = checkPassword($clientPassword);
+
 
       // Check for missing data
       if (empty($clientEmail) || empty($checkPassword)) {
@@ -130,6 +144,11 @@ switch ($action) {
          include '../view/login.php';
          exit;
       }
+
+      //testing
+      //echo "this is the LOGIN page check for missing data ";
+     // exit;
+
       // When a valid password exists, proceed with the login process
       // Query  client data based on the email address
       $clientData = getClient($clientEmail);
@@ -140,31 +159,34 @@ switch ($action) {
       $hashCheck = password_verify($clientPassword, $clientData['clientPassword']);
       // If the hashes don't match create an error
       // and return to the login view
-      if(!$hashCheck) {
-      $message = '<p class="warning" >Please check your password and try again.</p>';
-      include '../view/login.php';
-      exit;
-      }
-      // A valid user exists, log them in
-      $_SESSION['loggedin'] = TRUE;
-      // Remove the password from the array
-      // the array_pop function removes the last
-      // element from an array
-      array_pop($clientData);
-      // Store the array into the session
-      $_SESSION['clientData'] = $clientData;
-      // Send them to the admin view
-      include '../view/admin.php';
-      exit;
-
-      break;
-      case 'Logout':
-         session_unset();
-         session_destroy();
-         $_SESSION = array();
-         include '../index.php' ;
+      if (!$hashCheck) {
+         $message = '<p class="warning" >Please check your password and try again.</p>';
+         include '../view/login.php';
          exit;
-         break;
-   default:
+      } else {
+         // A valid user exists, log them in
+         $_SESSION['loggedin'] = TRUE;
+         // Remove the password from the array
+         // the array_pop function removes the last
+         // element from an array
+         array_pop($clientData);
+         // Store the array into the session
+         $_SESSION['clientData'] = $clientData;
+         // Send them to the admin view
+         include '../view/admin.php';
+         exit;
+      }
+      break;
+   case 'Logout':
+      session_unset();
+      session_destroy();
+      $_SESSION = array();
+      include '../index.php';
+      exit;
+      break;
+   default: 
+      //var_dump($_POST);
+       //exit;
+      include '../view/500.php';
       break;
 }

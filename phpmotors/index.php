@@ -1,4 +1,9 @@
 <?php
+//PHP Motors Contoller. 
+
+// Create or access a Session
+session_start();
+
 // Get the database connection file
  require_once 'library/connections.php';
 // Get the PHP Motors model for use as needed
@@ -6,11 +11,12 @@
 // Get the functions file
 require_once 'library/functions.php';
 
+
  // Get the array of classifications
  $classifications = getClassifications();
 
  //display navigation
- $navList =getNavList($classifications);
+ $navList = getNavList($classifications);
 //Demo to see if the array of classifications is functional (it is)
 // var_dump($classifications);
 //	exit;
@@ -41,6 +47,13 @@ switch ($action){
      include 'model/home.php';
    }
 */
+
+// Check if the firstname cookie exists, get its value
+if(isset($_COOKIE['firstName'])){
+   $cookieFirstname = filter_input(INPUT_COOKIE, 'firstName', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+  }
+
+
 //controller Switch statement, for template and home. 
    switch ($action){
       case 'template':

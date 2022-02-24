@@ -35,7 +35,7 @@ a {
 }
 header a.myaccount{
     font-size: 2rem;
-    
+    color: #3a3a3a;
 }
 img.logo{
     padding: 1rem;
@@ -44,6 +44,7 @@ img.logo{
 h5{
     align-items:center;
     text-align: center;
+    color: #3a3a3a;
 }
 
 /***********************************************NAV*******************************************************/
@@ -126,6 +127,7 @@ button {
 main {
     padding: 1rem;
     border-color: #a6cbeb;
+    color: #3a3a3a;
 }
 
 body {
@@ -133,7 +135,9 @@ body {
     border: solid;
     border-color: #a6cbeb;
     border-radius: 1em;
+    color: #3a3a3a;
 }
+
 
 /**********************************Footer*****************************************/
 footer p,
