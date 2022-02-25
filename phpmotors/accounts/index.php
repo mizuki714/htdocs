@@ -24,8 +24,8 @@ $classifications = getClassifications();
 $navList = getNavList($classifications);
 
 //Demo to see if the array of classifications is functional (it is)
- //var_dump($classifications);
- //	exit;
+//var_dump($classifications);
+//	exit;
 /*
 // Build a navigation bar using the $classifications array
 $navList = '<ul>';
@@ -120,18 +120,18 @@ switch ($action) {
 
    case 'LOGIN':
       //testing
-       echo "this is the LOGIN page";
-       exit;
+      //  echo "this is the LOGIN page";
+      //  exit;
 
       $clientEmail = trim(filter_input(INPUT_POST, 'clientEmail', FILTER_SANITIZE_EMAIL));
-     // echo $clientEmail;
-     // exit;
+      // echo $clientEmail;
+      // exit;
 
       $clientPassword = trim(filter_input(INPUT_POST, 'clientPassword', FILTER_SANITIZE_STRING));
 
       //testing
-     // echo  $clientPassword;
-     // echo $clientEmail;
+      // echo  $clientPassword;
+      // echo $clientEmail;
       //exit;
 
       $clientEmail = checkEmail($clientEmail);
@@ -147,7 +147,7 @@ switch ($action) {
 
       //testing
       //echo "this is the LOGIN page check for missing data ";
-     // exit;
+      // exit;
 
       // When a valid password exists, proceed with the login process
       // Query  client data based on the email address
@@ -184,9 +184,9 @@ switch ($action) {
       include '../index.php';
       exit;
       break;
-   default: 
+   default:
       //var_dump($_POST);
-       //exit;
-      include '../view/500.php';
+      //exit;
+      include '../view/admin.php';
       break;
 }

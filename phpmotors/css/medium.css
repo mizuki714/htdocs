@@ -15,11 +15,21 @@
         border: none;
         border-right: 1px solid rgba(0, 0, 0, 0.3);
     } 
-     
-
+    header, a#logout.acc, a#welcomeUser.acc{
+        font-size: 1rem;
+        color: #3a3a3a;
+        padding: auto;
+    }
+    a.myaccount{
+        font-size: 1.5rem;
+    }
+    a#logout.acc, a#welcomeUser.acc{
+        font-size: 1rem;
+    }
+   
     #header{
         display:grid;
-        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr .55fr .75fr
     }
     
     h5{
@@ -27,10 +37,23 @@
         text-align: center;
     }
     a.myaccount{
+        grid-column: 3/5;
+        grid-row: 1/2;
+        font-size: 1.5rem;
+    }
+    a#logout.acc{
        grid-column: 3/4;
+       grid-row: 1/2;
+       font-size: 1.5rem;
+    }
+    a#welcomeUser.acc{
+        grid-column: 4/5;
+        grid-row: 1/2;
+        font-size: 1.5rem;
     }
     img.logo{
         grid-column: 1/2;
+        grid-row: 1/2;
     }
     /******************************************html********************************************************/
     html{

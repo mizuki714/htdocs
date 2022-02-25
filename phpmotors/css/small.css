@@ -22,21 +22,30 @@ a {
 }
 
 /**********************************Header*****************************************/
-#header, header, header a.myaccount {
+#header, header, header a.myaccount, a#logout.acc, a#welcomeUser.acc {
     background-color: #ffff;
     padding: 1rem;
     border-radius: 1em 1em;
     justify-content: center;
     text-align: center;
 }
- a.myaccount, img.logo{
+ a.myaccount, img.logo , a#logout.acc, a#welcomeUser.acc{
     margin-left: auto;
     margin-right: auto;
 }
-header a.myaccount{
-    font-size: 2rem;
+ a#logout.acc, a#welcomeUser.acc{
+    font-size: 1rem;
     color: #3a3a3a;
+    padding: auto;
+    display:inline-block;
 }
+a.myaccount{
+    font-size: 1.5rem;
+}
+a#logout.acc, a#welcomeUser.acc{
+    font-size: 1rem;
+}
+
 img.logo{
     padding: 1rem;
 }

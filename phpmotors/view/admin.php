@@ -1,12 +1,17 @@
 <!-- Landing Page  when a client logs in-->
 <!-- testing
-<?php// echo"admin.php"; 
+<?php // echo"admin.php"; 
 //exit;?>-->
 
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/common/doctype.php'; ?>
 <title> PHP Motors | Logged In </title>
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/common/header.php'; ?>
+<nav>
+    <?php echo $navList; ?>
+</nav>
+<main>
 <!-- make sure the visitor is "logged in" write an if() test to see if the visitor is NOT logged in. If the visitor is NOT logged in, use a header function to send them to the main PHP Motors controller in order for the PHP Motors home view to be delivered.-->
+
 <?php
 if ($_SESSION['loggedin'] == false) {
     header("Location: /phpmotors/");
