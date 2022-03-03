@@ -1,5 +1,11 @@
-<?php include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/common/header.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/common/doctype.php'; ?>
+<title> PHP Motors | Update Account Information </title>
 
+<?php include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/common/header.php'; ?>
+<nav>
+    <?php echo $navList; ?>
+</nav>
+<main>
 <h1>Update Account Information</h1>
 
 <div class="updateAccount">
