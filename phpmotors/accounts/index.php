@@ -184,6 +184,83 @@ switch ($action) {
       include '../index.php';
       exit;
       break;
+
+      case 'client-update':
+         $clientId = $_SESSION['clientData']['clientId'];
+         $clientInfo = getClientInfo($clientId);
+         include '../view/client-update.php';
+         break;
+      case 'updateInfo':
+         // A valid password exists, proceed with the login process
+         // Query the client data based on the email address
+         $clientFirstname = filter_input(INPUT_POST, 'clientFirstname', FILTER_SANITIZE_STRING);
+         $clientLastname = filter_input(INPUT_POST, 'clientLastname', FILTER_SANITIZE_STRING);
+         $clientEmail = filter_input(INPUT_POST, 'clientEmail', FILTER_SANITIZE_EMAIL);
+         $clientId = filter_input(INPUT_POST, 'clientId', FILTER_SANITIZE_STRING);
+   
+         $clientEmail = checkEmail($clientEmail);
+         $currentEmail = $_SESSION['clientData']['clientEmail'];
+   
+         // Check for existing email
+         $existingEmail = checkExistingEmail($clientEmail);
+   
+         // Check for existing email address in the table
+         if ($currentEmail != $clientEmail) {
+            if($existingEmail){
+               $message = '<p class="warning" >That email address already exists. Do you want to login instead?</p>';
+               include '../view/client-update.php';
+               exit;
+            }
+         }
+         
+         // Check for missing data
+         if(empty($clientFirstname) || empty($clientLastname) || empty($clientEmail) || empty($clientId)){
+            $message = '<p class="warning" >Please provide information for all empty form fields.</p>';
+            include '../view/client-update.php';
+            exit; 
+           }
+         $updateOutcome = updateClient($clientFirstname, $clientLastname, $clientEmail, $clientId);
+         $clientId = $_SESSION['clientData']['clientId'];
+         $clientInfo = getClientInfo($clientId);
+         array_pop($clientInfo);
+         $_SESSION['clientData'] = $clientInfo;
+         if ($updateOutcome === 1) {
+            setcookie('firstname', $clientFirstname, 0, '/');
+            $_SESSION['message'] = "<p class='success' > $clientFirstname, your information has been updated. </p>";
+            header('Location: /phpmotors/accounts');
+            exit;
+         } else {
+            $message = "<p class='warning'> Sorry $clientFirstname, we could not update your account information. Please try again.</p>";
+            include '../view/client-update.php';
+            exit;
+         }
+         
+         break;
+      case 'updatePassword':
+         $clientPassword = filter_input(INPUT_POST, 'clientPassword', FILTER_SANITIZE_STRING);
+         $clientId = filter_input(INPUT_POST, 'clientId', FILTER_SANITIZE_NUMBER_INT);
+         $passwordCheck = checkPassword($clientPassword);
+         $clientInfo = getClientInfo($clientId);
+         // Run basic checks, return if errors
+         if (empty($passwordCheck)) {
+         $message = '<p class="warning" >Please provide a valid password.</p>';
+         include '../view/client-update.php';
+         exit;
+         }
+   
+         $hashedPassword = password_hash($clientPassword, PASSWORD_DEFAULT);
+         $updateOutcome = updateClientPassword($hashedPassword, $clientId);
+         if ($updateOutcome === 1) {
+            setcookie('firstname', $clientInfo['clientFirstname'], 0, '/');
+            $_SESSION['message'] = "<p class='success'> $clientInfo[clientFirstname], your password has been updated </p>";
+            header('Location: /phpmotors/accounts');
+            exit;
+         } else {
+            $message = "<p class='warning'> Sorry $clientFirstname, the password failed to update. Please try again.</p>";
+            include '../view/client-update.php';
+            exit;
+         }
+   
    default:
       //var_dump($_POST);
       //exit;

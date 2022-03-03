@@ -1,4 +1,11 @@
-<?php 
+<!-- Add Vehicle form -->
+<?php
+//add protection to the vehicle management views
+if ($_SESSION['clientData']['clientLevel'] < 2) {
+ header('location: /phpmotors/');
+ exit;
+}
+?><?php 
 
     $classificationList = '<select name="classificationId" id="classificationId">';
     $classificationList .= '<option value="0">Choose Car Classification</option>';

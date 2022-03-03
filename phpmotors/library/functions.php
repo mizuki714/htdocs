@@ -29,15 +29,20 @@ foreach ($classifications as $classification) {
 $navList .= '</ul>';
 return $navList;
 }
-// /If you create custom functions for any part of the server-side validation, make sure they are created (wasnt sure if I was supposed to do this or just add it above so I did that too... )
+
+  // Build the classifications select list 
 function buildClassificationList($classifications){ 
+   //Begin the select element
    $classificationList = '<select name="classificationId" id="classificationList">'; 
+   //Creates a default option with no value
    $classificationList .= "<option>Choose a Classification</option>"; 
+   //foreach loop to create a new option for each element within the array
    foreach ($classifications as $classification) { 
     $classificationList .= "<option value='$classification[classificationId]'>$classification[classificationName]</option>"; 
    } 
-   $classificationList .= '</select>'; 
+   //End the select element
+   $classificationList .= '</select>';
+   //Return the finished select element 
    return $classificationList; 
-   
   }
 ?>

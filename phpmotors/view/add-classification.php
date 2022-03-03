@@ -1,6 +1,12 @@
 <!--a form for adding a new classification -->
 
-<?php include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/common/doctype.php'; ?>
+<?php
+//add protection to the vehicle management views
+if ($_SESSION['clientData']['clientLevel'] < 2) {
+ header('location: /phpmotors/');
+ exit;
+}
+?><?php include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/common/doctype.php'; ?>
 <title> PHP Motors | Home </title>
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/common/header.php'; ?>
     <nav>

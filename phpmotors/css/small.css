@@ -8,7 +8,8 @@ h5 {
 }
 
 p,
-a {
+a ,
+li{
     font-family: 'VT323', monospace;
 }
 
@@ -225,16 +226,28 @@ img.FlameDetailsimg {
     margin: auto;
 }
 /****************** Vehicle Classification *****************/
-.vman, .vman a{
+.vman, .vman a, #vehicleManBttn, #updateAccBttn{
     text-decoration: none;
     list-style-type: none;  
     color:#3a3a3a;
     font-family: 'VT323', monospace;
     font-size:large;
 }
+#vehicleManBttn, #updateAccBttn{
+    background-color: #4c96d7;
+    text-align: center;
+    padding: .5em;
+}
 .addclass, .addcar{
     padding: 1em;
     margin: 1.5em;
     background-color: #4c96d7;
     text-align: center;
+    color:#3a3a3a;
+}
+.adminManage, .adminAccount, .adminInventory {
+padding: .5rem;
+}
+.adminAccount p,.adminInventory p {
+    padding: .5rem;
 }

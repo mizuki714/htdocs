@@ -58,4 +58,84 @@
         return $rowsChanged;
     }
 
+
+    // Get vehicles by classificationId 
+    function getInventoryByClassification($classificationId)
+    {
+        //Call the database connection
+        $db = phpmotorsConnect();
+        //Sql statement to query all inventory from the inventory table with a classificationId that matches the value passed
+        $sql = ' SELECT * FROM inventory WHERE classificationId = :classificationId';
+        //create PDO prepared statement
+        $stmt = $db->prepare($sql);
+        //Replace the named placeholder with the actual value as an integer
+        $stmt->bindValue(':classificationId', $classificationId, PDO::PARAM_INT);
+        //Run the prepared statement with the actual value.
+        $stmt->execute();
+        // Request a multi-dimensional array of the vehicles as an associative array, stores the array in a variable.
+        $inventory = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        //Close the database connection
+        $stmt->closeCursor();
+        //Return the array
+        return $inventory;
+    }
+
+
+    // Get vehicle information by invId
+    function getInvItemInfo($invId)
+    {
+        $db = phpmotorsConnect();
+        $sql = 'SELECT * FROM inventory WHERE invId = :invId';
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(':invId', $invId, PDO::PARAM_INT);
+        $stmt->execute();
+        $invInfo = $stmt->fetch(PDO::FETCH_ASSOC);
+        $stmt->closeCursor();
+        return $invInfo;
+    }
+    //Update vehicle
+    function updateVehicle($invMake, $invModel, $invDescription, $invImage, $invThumbnail, $invPrice, $invStock, $invColor, $classificationId, $invId)
+    {
+        //creates the connection using PHPMotors connect function 
+        $db = phpmotorsConnect();
+        //SQL statment to insert into inventory table
+        $sql = 'UPDATE inventory SET invMake = :invMake, invModel = :invModel, invDescription = :invDescription, invImage = :invImage, invThumbnail = :invThumbnail, invPrice = :invPrice, invStock = :invStock, invColor = :invColor, classificationId = :classificationId WHERE invId = :invId';
+        //A prepared statement using PHPMototrs connection
+        $stmt = $db->prepare($sql);
+        /* The next four lines will replace placeholders 
+        in the SQL statement with  actual values in the 
+        variables and then will tell the database the 
+        type of data it is */
+        $stmt->bindValue(':classificationId', $classificationId, PDO::PARAM_STR);
+        $stmt->bindValue(':invMake', $invMake, PDO::PARAM_STR);
+        $stmt->bindValue(':invModel', $invModel, PDO::PARAM_STR);
+        $stmt->bindValue(':invDescription', $invDescription, PDO::PARAM_STR);
+        $stmt->bindValue(':invImage', $invImage, PDO::PARAM_STR);
+        $stmt->bindValue(':invThumbnail', $invThumbnail, PDO::PARAM_STR);
+        $stmt->bindValue(':invPrice', $invPrice, PDO::PARAM_STR);
+        $stmt->bindValue(':invStock', $invStock, PDO::PARAM_STR);
+        $stmt->bindValue(':invColor', $invColor, PDO::PARAM_STR);
+        $stmt->bindValue(':invId', $invId, PDO::PARAM_INT);
+
+        // Insert the data
+        $stmt->execute();
+        // Ask how many rows changed as a result of our insert
+        $rowsChanged = $stmt->rowCount();
+        // Close the database interaction
+        $stmt->closeCursor();
+        // Return the indication of success (rows changed)
+        return $rowsChanged;
+    }
+//function to delete a vehicle
+    function deleteVehicle($invId) {
+        $db = phpmotorsConnect();
+        $sql = 'DELETE FROM inventory WHERE invId = :invId';
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(':invId', $invId, PDO::PARAM_INT);
+        $stmt->execute();
+        $rowsChanged = $stmt->rowCount();
+        $stmt->closeCursor();
+        return $rowsChanged;
+    }
+
     ?>

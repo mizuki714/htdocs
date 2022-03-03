@@ -8,5 +8,6 @@
     <script src="/phpmotors/js/lastupdated.js"></script>
     <script src="https://fonts.googleapis.com/css2?family=Roboto:wght@100&family=Source+Sans+Pro:wght@200&display=swap" rel="stylesheet"></script>
     <script src="/phpmotors/js/font.js"></script>
+    <script src="/phpmotors/js/inventory.js"></script>
 </body>
 </html>
