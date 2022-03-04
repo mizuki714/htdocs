@@ -1,4 +1,4 @@
-<!-- Delete Vehicle form -->
+<!-- Update Vehicle form -->
 <?php
 //add protection to the vehicle management views
 if ($_SESSION['clientData']['clientLevel'] < 2) {
@@ -42,6 +42,7 @@ if ($_SESSION['clientData']['clientLevel'] < 2) {
         } elseif (isset($invMake) && isset($invModel)) {
             echo "Modify$invMake $invModel";
         } ?></h1>
+        <h3>Note all Fields are Required</h3>
     <form method="post" action="/phpmotors/vehicles/index.php">
         <fieldset>
             <label for="classificationId">Classification</label> <br>

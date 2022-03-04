@@ -8,8 +8,8 @@ h5 {
 }
 
 p,
-a ,
-li{
+a,
+li {
     font-family: 'VT323', monospace;
 }
 
@@ -23,36 +23,49 @@ a {
 }
 
 /**********************************Header*****************************************/
-#header, header, header a.myaccount, a#logout.acc, a#welcomeUser.acc {
+#header,
+header,
+header a.myaccount,
+a#logout.acc,
+a#welcomeUser.acc {
     background-color: #ffff;
     padding: 1rem;
     border-radius: 1em 1em;
     justify-content: center;
     text-align: center;
 }
- a.myaccount, img.logo , a#logout.acc, a#welcomeUser.acc{
+
+a.myaccount,
+img.logo,
+a#logout.acc,
+a#welcomeUser.acc {
     margin-left: auto;
     margin-right: auto;
 }
- a#logout.acc, a#welcomeUser.acc{
+
+a#logout.acc,
+a#welcomeUser.acc {
     font-size: 1rem;
     color: #3a3a3a;
     padding: auto;
-    display:inline-block;
+    display: inline-block;
 }
-a.myaccount{
+
+a.myaccount {
     font-size: 1.5rem;
 }
-a#logout.acc, a#welcomeUser.acc{
+
+a#logout.acc,
+a#welcomeUser.acc {
     font-size: 1rem;
 }
 
-img.logo{
+img.logo {
     padding: 1rem;
 }
 
-h5{
-    align-items:center;
+h5 {
+    align-items: center;
     text-align: center;
     color: #3a3a3a;
 }
@@ -225,29 +238,59 @@ img.FluxCapacitorimg,
 img.FlameDetailsimg {
     margin: auto;
 }
+
 /****************** Vehicle Classification *****************/
-.vman, .vman a, #vehicleManBttn, #updateAccBttn{
+.vman,
+.vman a,
+a#vehicleManBttn,
+a#updateAccBttn {
     text-decoration: none;
-    list-style-type: none;  
-    color:#3a3a3a;
+    list-style-type: none;
+    color: #3a3a3a;
     font-family: 'VT323', monospace;
-    font-size:large;
+    font-size: large;
 }
-#vehicleManBttn, #updateAccBttn{
+
+a#vehicleManBttn,
+a#updateAccBttn {
     background-color: #4c96d7;
-    text-align: center;
     padding: .5em;
+    display: inline-block;
 }
-.addclass, .addcar{
+
+.addclass,
+.addcar {
     padding: 1em;
     margin: 1.5em;
     background-color: #4c96d7;
     text-align: center;
-    color:#3a3a3a;
+    color: #3a3a3a;
 }
-.adminManage, .adminAccount, .adminInventory {
-padding: .5rem;
+
+.adminManage,
+.adminAccount,
+.adminInventory,
+.adminData {
+    padding: .5rem;
+
 }
-.adminAccount p,.adminInventory p {
+
+div.adminAccount.admin a#updateAccBttn,
+div.adminInventory.admin a#vehicleManBttn {
+    text-align: center;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+div.adminAccount.admin,
+div.adminInventory.admin {
+    padding: .5rem;
+    border-style: solid;
+    margin: 1rem;
+}
+
+p#acctext,
+p#invtext {
+    margin: 1rem;
     padding: .5rem;
 }

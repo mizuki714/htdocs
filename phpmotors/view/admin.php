@@ -50,7 +50,7 @@
 <!-- update account information -->
             <div class="adminAccount admin">
                 <h2>Account Management</h2>
-                <p>Use this link to update account information.</p>
+                <p id="acctext">Use this link to update account information.</p>
                 <!--link must direct to the "accounts controller" and pass a name - value pair to deliver the update view-->
                 <p><a id='updateAccBttn' href="/phpmotors/accounts/index.php/?action=client-update">Update Account Information</a></p>
             </div>
@@ -59,7 +59,7 @@
             <div class="adminInventory admin">
                 <?php if ($_SESSION['clientData']['clientLevel'] > 1) {
                     echo '<h2>Inventory Management</h2>
-                  <p>Use this link to manage the inventory.</p>
+                  <p id="invtext">Use this link to manage the inventory.</p>
                   <p><a id="vehicleManBttn" href="/phpmotors/vehicles/index.php">Vehicle Management</a></p>';
                 }
                 ?>
