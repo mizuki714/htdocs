@@ -53,11 +53,11 @@ if ($_SESSION['clientData']['clientLevel'] < 2) {
                                                                                                                         echo "value='$invDescription'";
                                                                                                                     }  ?> required></textarea><br><br>
                 <label for="image">Image Path</label><br>
-                <input type="text" placeholder="Enter Vehicle image" name="invImage" id="image" value="/phpmotors/images/no-image.png" <?php if (isset($invImage)) {
+                <input type="text" placeholder="Enter Vehicle image" name="invImage" id="image" value="/phpmotors/images/vehicles/no-image.png" <?php if (isset($invImage)) {
                                                                                                                                             echo "value='$invImage'";
                                                                                                                                         }  ?> required><br><br>
                 <label for="thumbnail">Thumbnail Path</label><br>
-                <input type="text" placeholder="Enter Vehicle thumbnail" name="invThumbnail" value="/phpmotors/images/no-image.png" id="thumbnail" <?php if (isset($invThumbnail)) {
+                <input type="text" placeholder="Enter Vehicle thumbnail" name="invThumbnail" value="/phpmotors/images/vehicles/no-image.png" id="thumbnail" <?php if (isset($invThumbnail)) {
                                                                                                                                                         echo "value='$invThumbnail'";
                                                                                                                                                     }  ?> required><br><br>
                 <label for="price">Price</label><br>

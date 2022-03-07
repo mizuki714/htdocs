@@ -15,8 +15,8 @@
                 <img class="OwnTodayButton" src="/phpmotors/images/site/own_today.png" alt="Own Today Button">
             </section>
             <picture class="hero-picture">
-                <source srcset="/phpmotors/images/delorean.jpg" media="(min-width:50rem)">
-                <img class="hero-img" src="/phpmotors/images/delorean.jpg" alt="Image of a Delorean">
+                <source srcset="/phpmotors/images/vehicles/delorean.jpg" media="(min-width:50rem)">
+                <img class="hero-img" src="/phpmotors/images/vehicles/delorean.jpg" alt="Image of a Delorean">
             </picture>
         </section>
     </div>

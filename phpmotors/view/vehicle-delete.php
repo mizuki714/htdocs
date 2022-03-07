@@ -58,11 +58,11 @@ if ($_SESSION['clientData']['clientLevel'] < 2) {
                                                                                 echo "value='$invInfo[invModel]'";
                                                                             } ?>><br><br>
                 <label for="invDescription">Vehicle Description</label><br>
-                <textarea name="invDescription" readonly id="invDescription"><?php
+                <textarea name="invDescription" readonly id="invDescription"<?php
                                                                                 if (isset($invInfo['invDescription'])) {
                                                                                     echo $invInfo['invDescription'];
                                                                                 }
-                                                                                ?></textarea><br><br>
+                                                                                ?>></textarea><br><br>
                 <p class="warning">Confirm Vehicle Deletion. The delete is permanent.</p>
                 <input type="submit" class="regbtn" name="submit" value="Delete Vehicle">
                 <input type="hidden" name="action" value="deleteVehicle">
