@@ -355,7 +355,7 @@ p#invtext {
     font-weight: bold;
 }
 /****************classifications************************/
-/*-----------------Vehicles Classification----------------*/
+
 
 .classificationTitle {
     margin: 1rem 0;
@@ -403,7 +403,7 @@ ul#inv-display {
 
 
 
-/*-----------------Vehicle Details----------------*/
+/*******************-Vehicle Details******************/
 
 .carDetailsHead {
     margin: 15px 0;
