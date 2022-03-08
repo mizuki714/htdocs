@@ -47,4 +47,42 @@ function buildClassificationList($classifications){
    //Return the finished select element 
    return $classificationList; 
   }
+  function buildVehiclesDisplay($vehicles){
+    $dv = '<ul id="inv-display">';
+    foreach ($vehicles as $vehicle) {
+     $money = number_format($vehicle['invPrice'], 2, ".", ",");
+     $dv .= '<li>';
+     $dv .= "<img src='$vehicle[invThumbnail]' alt='Image of $vehicle[invMake] $vehicle[invModel] on phpmotors.com'>";
+     $dv .= '<hr>';
+     $dv .= "<a href='/phpmotors/vehicles/?action=pullVehicleData&vehicleId={$vehicle["invId"]}'><h2>$vehicle[invMake] $vehicle[invModel]</h2></a>";
+     $dv .= "<span>$$money</span>";
+     $dv .= '</li>';
+    }
+    $dv .= '</ul>';
+    return $dv;  
+}
+function buildThumbnailDisplay($thumbnailArray) {
+  $thumbs = '<ul id="thumb-display">';
+  foreach ($thumbnailArray as $image) {
+   $thumbs .= '<li>';
+   $thumbs .= "<img src='$image[imgPath]' alt='Image on PHP Motors.com'>";
+   $thumbs .= '</li>';
+ }
+  $thumbs .= '</ul>';
+  return $thumbs;
+}
+
+function vehicleDetailPage($vehicle) {
+  $money = number_format($vehicle['invPrice'], 2, ".", ",");
+  $dv = "<h1 class='carDetailsHead'>$vehicle[invMake] $vehicle[invModel]</h1>";
+  $dv .= "<img src='$vehicle[invImage]' alt='Image of $vehicle[invMake] $vehicle[invModel] on phpmotors.com' class='carImg'>";
+  $dv .= "<p class='price'>Price: $$money</p>";
+  $dv .= '<hr class="detailsHr">';
+  $dv .= "<h2 class='detailsTitle'>$vehicle[invMake] $vehicle[invModel] Details</h2>";
+  $dv .= "<p class='carDescription'>$vehicle[invDescription]</p>";
+  $dv .= "<p class='carColor'><b>Color: </b>$vehicle[invColor]</p>";
+  $dv .= "<p class='quantity'><b>Quantity in Stock: </b>$vehicle[invStock]</p>";   
+  return $dv; 
+}
+
 ?>

@@ -137,6 +137,7 @@
         $stmt->closeCursor();
         return $rowsChanged;
     }
+    
     //get a list of vehicles based on the classification.
     function getVehiclesByClassification($classificationName){
         $db = phpmotorsConnect();
@@ -147,20 +148,6 @@
         $vehicles = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $stmt->closeCursor();
         return $vehicles;
-       }
-       //build a display of vehicles within an unordered list.
-       function buildVehiclesDisplay($vehicles){
-        $dv = '<ul id="inv-display">';
-        foreach ($vehicles as $vehicle) {
-         $dv .= '<li>';
-         $dv .= "<img src='$vehicle[invThumbnail]' alt='Image of $vehicle[invMake] $vehicle[invModel] on phpmotors.com'>";
-         $dv .= '<hr>';
-         $dv .= "<h2>$vehicle[invMake] $vehicle[invModel]</h2>";
-         $dv .= "<span>$vehicle[invPrice]</span>";
-         $dv .= '</li>';
-        }
-        $dv .= '</ul>';
-        return $dv;
        }
        // Get information for all vehicles
 function getVehicles(){

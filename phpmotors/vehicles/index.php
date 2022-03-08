@@ -212,6 +212,27 @@ switch ($action) {
    // exit;
     include '../view/classification.php';
     break;
+  case 'pullVehicleData':
+      $invId = filter_input(INPUT_GET, 'vehicleId', FILTER_SANITIZE_NUMBER_INT);
+      $invInfo = getInvItemInfo($invId);
+     // $thumbnailArray = getThumbnails($invId);
+
+      if (isset($_SESSION['loggedin'])) {
+         $clientEmail = $_SESSION['clientData']['clientEmail'];
+         $clientInfo = getClient($clientEmail);
+     }
+      
+
+      $_SESSION['message'] = null;
+      if (!$invInfo) {
+         $_SESSION['message'] = '<p class"warning" >Sorry, no vehicle information could be found.</p>';
+         } else {
+           // $thumbnails = buildThumbnailDisplay($thumbnailArray);
+
+            $vehicle = vehicleDetailPage($invInfo);
+         }
+         include '../view/vehicle-detail.php';
+         break;
   default:
     $classificationList = buildClassificationList($classifications);
     include '../view/vehicle-management.php';
