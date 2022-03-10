@@ -31,7 +31,6 @@ foreach ($classifications as $classification) {
 $navList .= '</ul>';
 return $navList;
 }
-
   // Build the classifications select list 
 function buildClassificationList($classifications){ 
    //Begin the select element
@@ -47,6 +46,7 @@ function buildClassificationList($classifications){
    //Return the finished select element 
    return $classificationList; 
   }
+  //Builds Vechicle Display -add links that, when clicked, sends two name-value pairs to the vehicles controller.
   function buildVehiclesDisplay($vehicles){
     $dv = '<ul id="inv-display">';
     foreach ($vehicles as $vehicle) {
@@ -54,13 +54,14 @@ function buildClassificationList($classifications){
      $dv .= '<li>';
      $dv .= "<img src='$vehicle[invThumbnail]' alt='Image of $vehicle[invMake] $vehicle[invModel] on phpmotors.com'>";
      $dv .= '<hr>';
-     $dv .= "<a href='/phpmotors/vehicles/?action=pullVehicleData&vehicleId={$vehicle["invId"]}'><h2>$vehicle[invMake] $vehicle[invModel]</h2></a>";
+     $dv .= "<a href='/phpmotors/vehicles/?action=pullVehicleData&vehicleId={".urlencode($vehicle["invId"])."}'><h2>$vehicle[invMake] $vehicle[invModel]</h2></a>";
      $dv .= "<span>$$money</span>";
      $dv .= '</li>';
     }
     $dv .= '</ul>';
     return $dv;  
 }
+//Build the thumbnail display
 function buildThumbnailDisplay($thumbnailArray) {
   $thumbs = '<ul id="thumb-display">';
   foreach ($thumbnailArray as $image) {
@@ -71,7 +72,7 @@ function buildThumbnailDisplay($thumbnailArray) {
   $thumbs .= '</ul>';
   return $thumbs;
 }
-
+//builds the vehicle detail page
 function vehicleDetailPage($vehicle) {
   $money = number_format($vehicle['invPrice'], 2, ".", ",");
   $dv = "<h1 class='carDetailsHead'>$vehicle[invMake] $vehicle[invModel]</h1>";

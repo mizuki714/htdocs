@@ -66,23 +66,24 @@ if ($_SESSION['clientData']['clientLevel'] < 2) {
             <label for="invDescription">Description</label><br>
             <textarea id="invDescription" rows="4" cols="50" name="invDescription" placeholder="Enter Vehicle description here... " required>
                 <?php if (isset($invDescription)) {
+                    echo "$invDesc";
                 } elseif (isset($invInfo['invDescription'])) {
                     echo $invInfo['invDescription'];
                 } ?></textarea><br><br>
 
             <label for="image">Image Path</label><br>
-            <input type="text" placeholder="Enter Vehicle image" name="invImage" id="image" value="/phpmotors/images/no-image.png" required <?php if (isset($invImage)) {
-                                                                                                                                                echo "value='$invMake'";
-                                                                                                                                            } elseif (isset($invInfo['invMake'])) {
-                                                                                                                                                echo "value='$invInfo[invMake]'";
+            <input type="text" name="invImage" id="image"  required <?php if (isset($invImage)) {
+                                                                                                                                                echo "value='$invImage'";
+                                                                                                                                            } elseif (isset($invInfo['invImage'])) {
+                                                                                                                                                echo "value='$invInfo[invImage]'";
                                                                                                                                             } ?>><br><br>
 
             <label for="thumbnail">Thumbnail Path</label><br>
-            <input type="text" placeholder="Enter Vehicle thumbnail" name="invThumbnail" value="/phpmotors/images/no-image.png" id="thumbnail" required <?php
-                                                                                                                                                        if (isset($invImage)) {
-                                                                                                                                                            echo "value='$invImage'";
-                                                                                                                                                        } elseif (isset($invInfo['invImage'])) {
-                                                                                                                                                            echo "value='$invInfo[invImage]'";
+            <input type="text"  name="invThumbnail" id="thumbnail" required <?php
+                                                                                                                                                        if (isset($invThumbnail)) {
+                                                                                                                                                            echo "value='$invThumbnail'";
+                                                                                                                                                        } elseif (isset($invInfo['invThumbnail'])) {
+                                                                                                                                                            echo "value='$invInfo[invThumbnail]'";
                                                                                                                                                         }
                                                                                                                                                         ?>><br><br>
             <label for="price">Price</label><br>

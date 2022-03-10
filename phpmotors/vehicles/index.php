@@ -132,6 +132,15 @@ switch ($action) {
   case 'mod':
     $invId = filter_input(INPUT_GET, 'invId', FILTER_VALIDATE_INT);
     $invDescription = getInvItemInfo($invId);
+    //Thanks, I fixed it!
+    $invMake = $invDescription['invMake'];
+    $invModel = $invDescription['invModel'];
+    $invDesc = $invDescription['invDescription'];
+    $invImage = $invDescription['invImage'];
+    $invThumbnail = $invDescription['invThumbnail'];
+    $invPrice = $invDescription['invPrice'];
+    $invStock = $invDescription['invStock'];
+    $invColor = $invDescription['invColor'];
     if (count($invDescription) < 1) {
       $message = 'Sorry, no vehicle information could be found.';
     }
@@ -159,6 +168,7 @@ switch ($action) {
       include '../view/vehicle-update.php';
       exit;
     }
+   
 
     $updateResult = updateVehicle($invMake, $invModel, $invDescription, $invImage, $invThumbnail, $invPrice, $invStock, $invColor, $classificationId, $invId);
     if ($updateResult) {
