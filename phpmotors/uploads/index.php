@@ -39,9 +39,9 @@ if ($action == NULL) {
 * **************************************************** */
 // directory name where uploaded images are stored
 //test path
-$image_dir = '/phpmotors/uploads/images';
+//$image_dir = '/phpmotors/uploads/images';
 //true path
-//$image_dir = '/phpmotors/images/vehicles';
+$image_dir = '/phpmotors/images/vehicles';
 // The path is the full path from the server root
 $image_dir_path = $_SERVER['DOCUMENT_ROOT'] . $image_dir;
 

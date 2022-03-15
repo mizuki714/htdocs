@@ -138,17 +138,33 @@
         return $rowsChanged;
     }
     
-    //get a list of vehicles based on the classification.
+    // //get a list of vehicles based on the classification.
+    // function getVehiclesByClassification($classificationName){
+    //     $db = phpmotorsConnect();
+    //     $sql = 'SELECT * FROM inventory WHERE classificationId IN (SELECT classificationId FROM carclassification WHERE classificationName = :classificationName)';
+    //     $stmt = $db->prepare($sql);
+    //     $stmt->bindValue(':classificationName', $classificationName, PDO::PARAM_STR);
+    //     $stmt->execute();
+    //     $vehicles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    //     $stmt->closeCursor();
+    //     return $vehicles;
+    //    }
+//lter the functionality for displaying vehicles by classification. The primary thumbnail image for each vehicle should now be obtained from the images table and not the inventory table
     function getVehiclesByClassification($classificationName){
         $db = phpmotorsConnect();
-        $sql = 'SELECT * FROM inventory WHERE classificationId IN (SELECT classificationId FROM carclassification WHERE classificationName = :classificationName)';
+        $sql = 'SELECT i.invId, invMake, invModel, invDescription, im.imgPath AS invImage, 
+                  imtn.imgPath AS invThumbnail, invPrice, invStock, invColor, classificationId 
+                FROM inventory i 
+                  LEFT JOIN images im ON i.invId = im.invId AND im.imgName NOT LIKE "%-tn%" AND im.imgPrimary = 1 
+                  LEFT JOIN images imtn ON i.invId = imtn.invId AND imtn.imgName LIKE "%-tn%" AND imtn.imgPrimary = 1
+                WHERE classificationId IN (SELECT classificationId FROM carclassification WHERE classificationName = :classificationName)';
         $stmt = $db->prepare($sql);
         $stmt->bindValue(':classificationName', $classificationName, PDO::PARAM_STR);
         $stmt->execute();
         $vehicles = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $stmt->closeCursor();
         return $vehicles;
-       }
+      }
        // Get information for all vehicles
 function getVehicles(){
     $db = phpmotorsConnect();
