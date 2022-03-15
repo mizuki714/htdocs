@@ -1,5 +1,9 @@
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/common/doctype.php'; ?>
-<title> PHP Motors | TITLE </title>
+<title> PHP Motors | <?php if (isset($invInfo['invMake']) && isset($invInfo['invModel'])) {
+            echo "View Detail $invInfo[invMake] $invInfo[invModel]";
+        } elseif (isset($invMake) && isset($invModel)) {
+            echo "Modify $invMake $invModel";
+        } ?></title>
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/common/header.php'; ?>
 <?php
 // Get the database connection file
