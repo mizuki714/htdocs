@@ -11,6 +11,8 @@ require_once '../library/connections.php';
 require_once '../model/main-model.php';
 // Get the accounts model
 require_once '../model/accounts-model.php';
+// Get the uploads model
+require_once '../model/uploads-model.php';
 // Get the functions library
 require_once '../library/functions.php';
 

@@ -12,6 +12,8 @@ require_once '../model/main-model.php';
 require_once '../model/vehicles-model.php';
 // Get the accounts model
 require_once '../model/accounts-model.php';
+// Get the uploads model
+require_once '../model/uploads-model.php';
 // Get the functions file
 require_once '../library/functions.php';
 
