@@ -25,6 +25,7 @@ require_once '../library/functions.php';
  <main>
  <?php
 echo $vehicle;
+echo $thumbnails;
  ?>
 
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/common/footer.php';?>

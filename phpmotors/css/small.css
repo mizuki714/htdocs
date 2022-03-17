@@ -389,6 +389,7 @@ ul#inv-display {
 
 .carImg {
     max-width: 100%;
+    margin:auto;
 }
 
 .price {

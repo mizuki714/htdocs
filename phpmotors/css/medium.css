@@ -262,7 +262,7 @@ section.reviews{
         content: none;
     }
     #thumb-display {
-        position:absolute;
+       
         padding-top: 10px;
         top: 150px;
         
@@ -270,7 +270,7 @@ section.reviews{
 
     #thumb-display img {
         padding-top: 5px;
-        width: 65%;
+        width: 35%;
     }
 
     #thumb-display img:hover {

@@ -69,6 +69,7 @@ function checkExistingImage($imgName){
 function getThumbnails($vehicleId){
     $db = phpmotorsConnect();
     $sql = "SELECT imgPath, imgName FROM images WHERE invId = :vehicleId AND imgPath LIKE '%-tn%' ";
+    //join inventory table to display make and model
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':vehicleId', $vehicleId, PDO::PARAM_INT);
     $stmt->execute();

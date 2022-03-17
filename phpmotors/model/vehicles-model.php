@@ -80,12 +80,15 @@
         return $inventory;
     }
 
-
     // Get vehicle information by invId
     function getInvItemInfo($invId)
     {
         $db = phpmotorsConnect();
-        $sql = 'SELECT * FROM inventory WHERE invId = :invId';
+        //get image path for the large primary
+        $sql = 'SELECT i.invId, invMake, invModel, invDescription, im.imgPath AS imgPath, invPrice, invStock, invColor, classificationId 
+      FROM inventory i 
+        LEFT JOIN images im ON i.invId = im.invId AND im.imgName NOT LIKE "%-tn%" AND im.imgPrimary = 1 
+      WHERE i.invId = :invId ';
         $stmt = $db->prepare($sql);
         $stmt->bindValue(':invId', $invId, PDO::PARAM_INT);
         $stmt->execute();
@@ -175,5 +178,6 @@ function getVehicles(){
     $stmt->closeCursor();
     return $invInfo;
 }
+
 
     ?>
