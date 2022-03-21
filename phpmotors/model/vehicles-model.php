@@ -85,7 +85,7 @@
     {
         $db = phpmotorsConnect();
         //get image path for the large primary
-        $sql = 'SELECT i.invId, invMake, invModel, invDescription, im.imgPath AS imgPath, invPrice, invStock, invColor, classificationId 
+        $sql = 'SELECT i.invId, invMake, invModel, invDescription, im.imgPath AS imgPath, invPrice,invStock, invColor, classificationId 
       FROM inventory i 
         LEFT JOIN images im ON i.invId = im.invId AND im.imgName NOT LIKE "%-tn%" AND im.imgPrimary = 1 
       WHERE i.invId = :invId ';

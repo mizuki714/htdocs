@@ -94,14 +94,14 @@ if ($_SESSION['clientData']['clientLevel'] < 2) {
                                                                                                             echo "value='$invInfo[invPrice]'";
                                                                                                         }
                                                                                                         ?>><br><br>
-            <label for="stock"># In Stock</label><br>
-            <input type="text" placeholder="Enter Vehicle Ammount" name="invStock" id="stock" required <?php
+            <<label for="stock"># In Stock</label><br>
+            <input type="text" placeholder="Enter Vehicle Ammount" name="invStock" id="stock" required <?php 
                                                                                                         if (isset($invStock)) {
                                                                                                             echo "value='$invStock'";
                                                                                                         } elseif (isset($invInfo['invStock'])) {
                                                                                                             echo "value='$invInfo[invStock]'";
                                                                                                         }
-                                                                                                        ?>><br><br>
+                                                                                                        ?>><br><br> 
             <label for="color">Color</label><br>
             <input type="text" placeholder="Enter  Vehicle color" name="invColor" id="color" required <?php
                                                                                                         if (isset($invColor)) {
