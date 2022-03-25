@@ -1,7 +1,7 @@
 <?php
 function getSearch($searchbar){
  $button= $_GET ['submit'];
-$search = $_GET ['search'];
+$search = $_GET ['searchbar'];
 //creates the connection using PHPMotors connect function 
 $db = phpmotorsConnect();
 $sql = "SELECT * FROM inventory WHERE MATCH( InvID, invYear, invMake, invModel, invDescription, invPrice, invMiles, invColor, classificationId, invStock) AGAINST ('%" . $searchbar . "%')";
@@ -14,15 +14,14 @@ if ($foundnum == 0)
 {
     echo "Sorry, We are unable to find a vehicle with a search term of '<b>$searchbar</b>'.";
 }
+else{
 //if results are found
-else{ 
     //creates the connection using PHPMotors connect function 
     $db = phpmotorsConnect();
     echo "<h1><strong> $foundnum Results Found for \"".$searchbar."\"</strong></h1>";
     $sql = "SELECT * FROM inventory WHERE MATCH( InvID, invYear, invMake, invModel, invDescription, invPrice, invMiles, invColor, classificationId, invStock) AGAINST ('%" . $search . "%')";
     $stmt = $db->prepare($sql);
-
- while($runrows = $stmt = $db->prepare($sql))
+   if ($foundnum < 0)
  {
     $class = $_POST['classificationId'];
     $make = $_POST['invMake'];
@@ -54,17 +53,6 @@ $invStock = trim(filter_input(INPUT_POST, 'invStock', FILTER_SANITIZE_STRING));
 $invMiles = trim(filter_input(INPUT_POST, 'invMiles', FILTER_SANITIZE_NUMBER_INT));
 $invColor = trim(filter_input(INPUT_POST, 'invColor', FILTER_SANITIZE_STRING));
 
-
-//idk if this is useful anymore or not so it stays for now but hopefully i fixed it
-$class = $_POST['classificationId'];
-$make = $_POST['invMake'];
-$model = $_POST['invModel'];
-$description = $_POST['invDescription'];
-$price = $_POST['invPrice'];
-$stock = $_POST['invStock'];
-$miles = $_POST['invMiles'];
-$color = $_POST['invColor'];
-
 if (empty($classificationId) || empty($invMake) || empty($invModel) || empty($invDescription)|| empty($invPrice) || empty($invStock) || empty($invMiles) || empty($invColor)) {
   $message = "Please Enter a Search Term.";
 } 
@@ -73,7 +61,7 @@ else {
 }
  }
 }
-}
+
 function buildSearchResultPage($runrows){
     if ($runrows == $runrows["invId"]){
       echo "<h5 class='card-title'>".$runrows["invId"] ."</h5>";
@@ -105,11 +93,12 @@ function buildSearchResultPage($runrows){
     elseif ($runrows == $runrows["classificationId"]){
       echo "<h5 class='card-title'>".$runrows["classificationId"] ."</h5>";
    }
-  
-   else {
+else{
      echo "Sorry, An error has occured.";
    }
    return $runrows;
   }
+  }
+
 ?>
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/common/footer.php';?>
