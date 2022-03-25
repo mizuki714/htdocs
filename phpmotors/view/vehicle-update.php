@@ -72,10 +72,10 @@ if ($_SESSION['clientData']['clientLevel'] < 2) {
                 } ?></textarea><br><br>
 
             <label for="image">Image Path</label><br>
-            <input type="text" name="invImage" id="image"  required <?php if (isset($invImage)) {
-                                                                                                                                                echo "value='$invImage'";
-                                                                                                                                            } elseif (isset($invInfo['invImage'])) {
-                                                                                                                                                echo "value='$invInfo[invImage]'";
+            <input type="text" name="imgPath" id="image"  required <?php if (isset($imgPath)) {
+                                                                                                                                                echo "value='$imgPath'";
+                                                                                                                                            } elseif (isset($invInfo['imgPath'])) {
+                                                                                                                                                echo "value='$invInfo[imgPath]'";
                                                                                                                                             } ?>><br><br>
 
             <label for="thumbnail">Thumbnail Path</label><br>
@@ -94,12 +94,20 @@ if ($_SESSION['clientData']['clientLevel'] < 2) {
                                                                                                             echo "value='$invInfo[invPrice]'";
                                                                                                         }
                                                                                                         ?>><br><br>
-            <<label for="stock"># In Stock</label><br>
+            <label for="stock"># In Stock</label><br>
             <input type="text" placeholder="Enter Vehicle Ammount" name="invStock" id="stock" required <?php 
                                                                                                         if (isset($invStock)) {
                                                                                                             echo "value='$invStock'";
                                                                                                         } elseif (isset($invInfo['invStock'])) {
                                                                                                             echo "value='$invInfo[invStock]'";
+                                                                                                        }
+                                                                                                        ?>><br><br>
+                                                                                                        <label for="Mileage"># In Stock</label><br>
+            <input type="text" placeholder="Enter Vehicle Miles" name="invMiles" id="miles" required <?php 
+                                                                                                        if (isset($invMiles)) {
+                                                                                                            echo "value='$invMiles'";
+                                                                                                        } elseif (isset($invInfo['invMiles'])) {
+                                                                                                            echo "value='$invInfo[invMiles]'";
                                                                                                         }
                                                                                                         ?>><br><br> 
             <label for="color">Color</label><br>

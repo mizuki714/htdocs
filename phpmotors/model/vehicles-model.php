@@ -4,13 +4,13 @@
 
     //Function for inserting a new vehicle to the inventory table
 
-    function addNewVehicle($class, $make, $model, $description, $image, $thumbnail, $price, $stock, $color)
+    function addNewVehicle($class, $make, $model, $description, $image, $thumbnail, $price, $stock, $miles, $color)
     {
         //creates the connection using PHPMotors connect function 
         $db = phpmotorsConnect();
         //SQL statment to insert into inventory table
-        $sql = 'INSERT INTO inventory (classificationId, invMake, invModel, invDescription, invImage, invThumbnail, invPrice, invStock, invColor)
-                VALUES (:classificationId, :invMake, :invModel, :invDescription, :invImage, :invThumbnail, :invPrice, :invStock, :invColor)';
+        $sql = 'INSERT INTO inventory (classificationId, invMake, invModel, invDescription, imgPath, invThumbnail, invPrice, invStock, invMiles, invColor)
+                VALUES (:classificationId, :invMake, :invModel, :invDescription, :imgPath, :invThumbnail, :invPrice, :invStock, :invMiles, :invColor)';
         //A prepared statement using PHPMototrs connection
         $stmt = $db->prepare($sql);
         /* The next four lines will replace placeholders 
@@ -21,10 +21,11 @@
         $stmt->bindValue(':invMake', $make, PDO::PARAM_STR);
         $stmt->bindValue(':invModel', $model, PDO::PARAM_STR);
         $stmt->bindValue(':invDescription', $description, PDO::PARAM_STR);
-        $stmt->bindValue(':invImage', $image, PDO::PARAM_STR);
+        $stmt->bindValue(':imgPath', $image, PDO::PARAM_STR);
         $stmt->bindValue(':invThumbnail', $thumbnail, PDO::PARAM_STR);
         $stmt->bindValue(':invPrice', $price, PDO::PARAM_STR);
         $stmt->bindValue(':invStock', $stock, PDO::PARAM_STR);
+        $stmt->bindValue(':invMiles', $miles, PDO::PARAM_STR);
         $stmt->bindValue(':invColor', $color, PDO::PARAM_STR);
 
         // Insert the data
@@ -85,24 +86,25 @@
     {
         $db = phpmotorsConnect();
         //get image path for the large primary
-        $sql = 'SELECT i.invId, invMake, invModel, invDescription, im.imgPath AS imgPath, invPrice,invStock, invColor, classificationId 
+        $sql = 'SELECT i.invId, invMake, invModel, invDescription, im.imgPath AS imgPath, invPrice, invStock, invMiles, invColor, classificationId 
       FROM inventory i 
         LEFT JOIN images im ON i.invId = im.invId AND im.imgName NOT LIKE "%-tn%" AND im.imgPrimary = 1 
       WHERE i.invId = :invId ';
         $stmt = $db->prepare($sql);
-        $stmt->bindValue(':invId', $invId, PDO::PARAM_INT);
+        //changed from INT to STRING 
+        $stmt->bindValue(':invId', $invId, PDO::PARAM_STR);
         $stmt->execute();
         $invInfo = $stmt->fetch(PDO::FETCH_ASSOC);
         $stmt->closeCursor();
         return $invInfo;
     }
     //Update vehicle
-    function updateVehicle($invMake, $invModel, $invDescription, $invImage, $invThumbnail, $invPrice, $invStock, $invColor, $classificationId, $invId)
+    function updateVehicle($invMake, $invModel, $invDescription, $imgPath, $invThumbnail, $invPrice, $invStock, $invMiles, $invColor, $classificationId, $invId)
     {
         //creates the connection using PHPMotors connect function 
         $db = phpmotorsConnect();
         //SQL statment to insert into inventory table
-        $sql = 'UPDATE inventory SET invMake = :invMake, invModel = :invModel, invDescription = :invDescription, invImage = :invImage, invThumbnail = :invThumbnail, invPrice = :invPrice, invStock = :invStock, invColor = :invColor, classificationId = :classificationId WHERE invId = :invId';
+        $sql = 'UPDATE inventory SET invMake = :invMake, invModel = :invModel, invDescription = :invDescription, imgPath = :imgPath, invThumbnail = :invThumbnail, invPrice = :invPrice, invStock = :invStock, invMiles = :invMiles, invColor = :invColor, classificationId = :classificationId WHERE invId = :invId';
         //A prepared statement using PHPMototrs connection
         $stmt = $db->prepare($sql);
         /* The next four lines will replace placeholders 
@@ -113,10 +115,11 @@
         $stmt->bindValue(':invMake', $invMake, PDO::PARAM_STR);
         $stmt->bindValue(':invModel', $invModel, PDO::PARAM_STR);
         $stmt->bindValue(':invDescription', $invDescription, PDO::PARAM_STR);
-        $stmt->bindValue(':invImage', $invImage, PDO::PARAM_STR);
+        $stmt->bindValue(':imgPath', $imgPath, PDO::PARAM_STR);
         $stmt->bindValue(':invThumbnail', $invThumbnail, PDO::PARAM_STR);
         $stmt->bindValue(':invPrice', $invPrice, PDO::PARAM_STR);
         $stmt->bindValue(':invStock', $invStock, PDO::PARAM_STR);
+        $stmt->bindValue(':invMiles', $invMiles, PDO::PARAM_STR);
         $stmt->bindValue(':invColor', $invColor, PDO::PARAM_STR);
         $stmt->bindValue(':invId', $invId, PDO::PARAM_INT);
 
@@ -155,8 +158,8 @@
 //lter the functionality for displaying vehicles by classification. The primary thumbnail image for each vehicle should now be obtained from the images table and not the inventory table
     function getVehiclesByClassification($classificationName){
         $db = phpmotorsConnect();
-        $sql = 'SELECT i.invId, invMake, invModel, invDescription, im.imgPath AS invImage, 
-                  imtn.imgPath AS invThumbnail, invPrice, invStock, invColor, classificationId 
+        $sql = 'SELECT i.invId, invMake, invModel, invDescription, im.imgPath AS imgPath, 
+                  imtn.imgPath AS invThumbnail, invPrice, invStock, invMiles, invColor, classificationId 
                 FROM inventory i 
                   LEFT JOIN images im ON i.invId = im.invId AND im.imgName NOT LIKE "%-tn%" AND im.imgPrimary = 1 
                   LEFT JOIN images imtn ON i.invId = imtn.invId AND imtn.imgName LIKE "%-tn%" AND imtn.imgPrimary = 1

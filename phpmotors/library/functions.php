@@ -54,7 +54,8 @@ function buildClassificationList($classifications){
      $dv .= '<li>';
      $dv .= "<img src='$vehicle[invThumbnail]' alt='Image of $vehicle[invMake] $vehicle[invModel] on phpmotors.com'>";
      $dv .= '<hr>';
-     $dv .= "<a href='/phpmotors/vehicles/?action=pullVehicleData&vehicleId={".urlencode($vehicle["invId"])."}'><h2>$vehicle[invMake] $vehicle[invModel]</h2></a>";
+     //removed {}
+     $dv .= "<a href='/phpmotors/vehicles/?action=pullVehicleData&vehicleId=".urlencode($vehicle["invId"])."'><h2>$vehicle[invMake] $vehicle[invModel]</h2></a>";
      $dv .= "<span>$$money</span>";
      $dv .= '</li>';
     }
@@ -66,7 +67,7 @@ function buildThumbnailDisplay($thumbnailArray) {
   $thumbs = '<ul id="thumb-display">';
   foreach ($thumbnailArray as $image) {
    $thumbs .= '<li>';
-   $thumbs .= "<img src='$image[imgPath]' alt='Image on PHP Motors.com'>";
+   $thumbs .= "<img src='$image[imgPath]' alt='Image on PHP Motors.com' class='thumbnail'>";
    $thumbs .= '</li>';
  }
   $thumbs .= '</ul>';
@@ -82,7 +83,8 @@ function vehicleDetailPage($vehicle) {
   $dv .= "<h2 class='detailsTitle'>$vehicle[invMake] $vehicle[invModel] Details</h2>";
   $dv .= "<p class='carDescription'>$vehicle[invDescription]</p>";
   $dv .= "<p class='carColor'><b>Color: </b>$vehicle[invColor]</p>";
-  $dv .= "<p class='quantity'><b>Quantity in Stock: </b>$vehicle[invStock]</p>";   
+  $dv .= "<p class='quantity'><b>Quantity in Stock: </b>$vehicle[invStock]</p>";
+  $dv .= "<p class='quantity'><b> Mileage: </b>$vehicle[invMiles]</p>";  
   return $dv; 
 }
 
@@ -245,5 +247,5 @@ function resizeImage($old_image_path, $new_image_path, $max_width, $max_height) 
    imagedestroy($old_image);
  } // ends resizeImage function
 
-
+ 
 ?>

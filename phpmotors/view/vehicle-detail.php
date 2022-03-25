@@ -10,6 +10,8 @@
 require_once '../library/connections.php';
 // Get the PHP Motors model for use as needed
  require_once '../model/main-model.php';
+ // Get the search file
+require_once '../model/searchbar-model.php';
 // Get the functions file
 require_once '../library/functions.php';
 

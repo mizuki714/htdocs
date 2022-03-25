@@ -59,6 +59,13 @@ if(isset($_COOKIE['firstName'])){
       case 'template':
       include 'template/template.php';
       break;
+      case 'searchbar':
+         echo "<p> Searchbar</p>";
+         include '../view/search-results.php';
+        break;
+       case 'searchf':
+           echo "<p> SearchF</p>";
+           include '../view/search-results.php';
       default:
       include 'model/home.php';
       break;

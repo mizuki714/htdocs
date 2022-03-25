@@ -16,8 +16,8 @@
             </section>
             <picture class="hero-picture">
                 <!-- I already did this! w00t!-->
-                <source srcset="/phpmotors/images/vehicles/delorean.jpg" media="(min-width:50rem)">
-                <img class="hero-img" src="/phpmotors/images/vehicles/delorean.jpg" alt="Image of a Delorean">
+                <source srcset="/phpmotors/images/vehicles/1982-dmc-delorean.jpg" media="(min-width:50rem)">
+                <img class="hero-img" src="/phpmotors/images/vehicles/1982-dmc-delorean.jpg" alt="Image of a Delorean">
             </picture>
         </section>
     </div>

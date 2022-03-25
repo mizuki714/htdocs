@@ -12,6 +12,8 @@ require_once '../model/main-model.php';
 require_once '../model/vehicles-model.php';
 // Get the accounts model
 require_once '../model/accounts-model.php';
+// Get the search model
+//require_once '../model/searchbar-model.php';
 // Get the uploads model
 require_once '../model/uploads-model.php';
 // Get the functions file
@@ -92,10 +94,11 @@ switch ($action) {
     $invMake = trim(filter_input(INPUT_POST, 'invMake', FILTER_SANITIZE_STRING));
     $invModel = trim(filter_input(INPUT_POST, 'invModel', FILTER_SANITIZE_STRING));
     $invDescription = trim(filter_input(INPUT_POST, 'invDescription', FILTER_SANITIZE_STRING));
-    $invImage = trim(filter_input(INPUT_POST, 'invImage', FILTER_SANITIZE_STRING));
+    $imgPath = trim(filter_input(INPUT_POST, 'imgPath', FILTER_SANITIZE_STRING));
     $invThumbnail = trim(filter_input(INPUT_POST, 'invThumbnail', FILTER_SANITIZE_STRING));
     $invPrice = trim(filter_input(INPUT_POST, 'invPrice', FILTER_SANITIZE_STRING, FILTER_FLAG_ALLOW_FRACTION));
     $invStock = trim(filter_input(INPUT_POST, 'invStock', FILTER_SANITIZE_STRING));
+    $invMiles = trim(filter_input(INPUT_POST, 'invMiles', FILTER_SANITIZE_NUMBER_INT));
     $invColor = trim(filter_input(INPUT_POST, 'invColor', FILTER_SANITIZE_STRING));
 
 
@@ -104,16 +107,17 @@ switch ($action) {
     $make = $_POST['invMake'];
     $model = $_POST['invModel'];
     $description = $_POST['invDescription'];
-    $image = $_POST['invImage'];
+    $image = $_POST['imgPath'];
     $thumbnail = $_POST['invThumbnail'];
     $price = $_POST['invPrice'];
     $stock = $_POST['invStock'];
+    $miles = $_POST['invMiles'];
     $color = $_POST['invColor'];
 
-    if (empty($classificationId) || empty($invMake) || empty($invModel) || empty($invDescription) || empty($invImage) || empty($invThumbnail) || empty($invPrice) || empty($invStock) || empty($invColor)) {
+    if (empty($classificationId) || empty($invMake) || empty($invModel) || empty($invDescription) || empty($imgPath) || empty($invThumbnail) || empty($invPrice) || empty($invStock) || empty($invMiles) || empty($invColor)) {
       $message = "Form not complete. Please fill in all fields.";
     } else {
-      addNewVehicle($classificationId, $invMake, $invModel, $invDescription, "/phpmotors/images/vehicles/no-image.png", "/phpmotors/images/vehicles/no-image.png", $invPrice, $invStock, $invColor);
+      addNewVehicle($classificationId, $invMake, $invModel, $invDescription, "/phpmotors/images/vehicles/no-image.png", "/phpmotors/images/vehicles/no-image.png", $invPrice, $invStock, $invMiles, $invColor);
       $message = "Form submission successful.";
     }
     include '../view/add-vehicle.php';
@@ -138,10 +142,11 @@ switch ($action) {
     $invMake = $invDescription['invMake'];
     $invModel = $invDescription['invModel'];
     $invDesc = $invDescription['invDescription'];
-    $invImage = $invDescription['invImage'];
+    $imgPath = $invDescription['imgPath'];
     $invThumbnail = $invDescription['invThumbnail'];
     $invPrice = $invDescription['invPrice'];
     $invStock = $invDescription['invStock'];
+    $invMiles = $invDescription['invMiles'];
     $invColor = $invDescription['invColor'];
     if (count($invDescription) < 1) {
       $message = 'Sorry, no vehicle information could be found.';
@@ -153,18 +158,20 @@ switch ($action) {
     $invMake = trim(filter_input(INPUT_POST, 'invMake', FILTER_SANITIZE_STRING));
     $invModel = trim(filter_input(INPUT_POST, 'invModel', FILTER_SANITIZE_STRING));
     $invDescription = trim(filter_input(INPUT_POST, 'invDescription', FILTER_SANITIZE_STRING));
-    $invImage = trim(filter_input(INPUT_POST, 'invImage', FILTER_SANITIZE_STRING));
+    //change invImg to imgPath
+    $imgPath = trim(filter_input(INPUT_POST, 'imgPath', FILTER_SANITIZE_STRING));
     $invThumbnail = trim(filter_input(INPUT_POST, 'invThumbnail', FILTER_SANITIZE_STRING));
     $invPrice = trim(filter_input(INPUT_POST, 'invPrice', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION));
     $invStock = trim(filter_input(INPUT_POST, 'invStock', FILTER_SANITIZE_NUMBER_INT));
+    $invMiles = trim(filter_input(INPUT_POST, 'invMiles', FILTER_SANITIZE_NUMBER_INT));
     $invColor = trim(filter_input(INPUT_POST, 'invColor', FILTER_SANITIZE_STRING));
     $classificationId = trim(filter_input(INPUT_POST, 'classificationId', FILTER_SANITIZE_NUMBER_INT));
     $invId = trim(filter_input(INPUT_POST, 'invId', FILTER_SANITIZE_NUMBER_INT));
 
     if (
       empty($classificationId) || empty($invMake) || empty($invModel)
-      || empty($invDescription) || empty($invImage) || empty($invThumbnail)
-      || empty($invPrice) || empty($invStock) || empty($invColor)
+      || empty($invDescription) || empty($imgPath) || empty($invThumbnail)
+      || empty($invPrice) || empty($invStock) || empty($invMiles) || empty($invColor)
     ) {
       $message = '<p class="warning" >Please complete all information for the item! Double check the classification of the item.</p>';
       include '../view/vehicle-update.php';
@@ -172,7 +179,7 @@ switch ($action) {
     }
    
 
-    $updateResult = updateVehicle($invMake, $invModel, $invDescription, $invImage, $invThumbnail, $invPrice, $invStock, $invColor, $classificationId, $invId);
+    $updateResult = updateVehicle($invMake, $invModel, $invDescription, $imgPath, $invThumbnail, $invPrice, $invStock, $invMiles, $invColor, $classificationId, $invId);
     if ($updateResult) {
       $message = "<p class='success' >Congratulations, the $invMake $invModel was successfully updated.</p>";
       $_SESSION['message'] = $message;
@@ -225,7 +232,8 @@ switch ($action) {
     include '../view/classification.php';
     break;
   case 'pullVehicleData':
-      $invId = filter_input(INPUT_GET, 'vehicleId', FILTER_SANITIZE_NUMBER_INT);
+    //changed from INT to STRING
+      $invId = filter_input(INPUT_GET, 'vehicleId', FILTER_SANITIZE_STRING);
       $invInfo = getInvItemInfo($invId);
       $thumbnailArray = getThumbnails($invId);
 
@@ -234,7 +242,6 @@ switch ($action) {
          $clientInfo = getClient($clientEmail);
      }
       
-
       $_SESSION['message'] = null;
       if (!$invInfo) {
          $_SESSION['message'] = '<p class"warning" >Sorry, no vehicle information could be found.</p>';
@@ -245,6 +252,14 @@ switch ($action) {
          }
          include '../view/vehicle-detail.php';
          break;
+   case 'searchbar':
+          echo "<p> Searchbar</p>";
+          include '../view/search-results.php';
+         break;
+  case 'searchf':
+            echo "<p> SearchfF</p>";
+            include '../view/search-results.php';  
+
   default:
     $classificationList = buildClassificationList($classifications);
     include '../view/vehicle-management.php';

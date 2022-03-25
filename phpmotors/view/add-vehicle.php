@@ -53,8 +53,8 @@ if ($_SESSION['clientData']['clientLevel'] < 2) {
                                                                                                                         echo "value='$invDescription'";
                                                                                                                     }  ?> required></textarea><br><br>
                 <label for="image">Image Path</label><br>
-                <input type="text" placeholder="Enter Vehicle image" name="invImage" id="image" value="/phpmotors/images/vehicles/no-image.png" <?php if (isset($invImage)) {
-                                                                                                                                            echo "value='$invImage'";
+                <input type="text" placeholder="Enter Vehicle image" name="imgPath" id="image" value="/phpmotors/images/vehicles/no-image.png" <?php if (isset($imgPath)) {
+                                                                                                                                            echo "value='$imgPath'";
                                                                                                                                         }  ?> required><br><br>
                 <label for="thumbnail">Thumbnail Path</label><br>
                 <input type="text" placeholder="Enter Vehicle thumbnail" name="invThumbnail" value="/phpmotors/images/vehicles/no-image.png" id="thumbnail" <?php if (isset($invThumbnail)) {
@@ -68,10 +68,15 @@ if ($_SESSION['clientData']['clientLevel'] < 2) {
                 <input type="text" placeholder="Enter Vehicle Ammount" name="invStock" id="stock" <?php if (isset($invStock)) {
                                                                                                         echo "value='$invStock'";
                                                                                                     }  ?> required><br><br>
+                                                                                                    <label for="Mileage"># In Stock</label><br>
+                <input type="text" placeholder="Enter Vehicle Mileage" name="invMiles" id="miles" <?php if (isset($invMiles)) {
+                                                                                                        echo "value='$invMiles'";
+                                                                                                    }  ?> required><br><br>
                 <label for="color">Color</label><br>
                 <input type="text" placeholder="Enter  Vehicle color" name="invColor" id="color" <?php if (isset($invColor)) {
                                                                                                         echo "value='$invColor'";
                                                                                                     }  ?> required><br><br>
+                                                                                                    
                 <button type="submit">Add Vehicle</button>
                 <input type="hidden" name="action" value="add-vehicle-form">
             </fieldset>
