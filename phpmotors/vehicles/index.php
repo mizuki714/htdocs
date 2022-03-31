@@ -136,14 +136,14 @@ switch ($action) {
     echo json_encode($inventoryArray);
     break;
   case 'mod':
-    $invId = filter_input(INPUT_GET, 'invId', FILTER_VALIDATE_INT);
+    $invId = filter_input(INPUT_GET, 'invId');
     $invDescription = getInvItemInfo($invId);
     //Thanks, I fixed it!
     $invMake = $invDescription['invMake'];
     $invModel = $invDescription['invModel'];
     $invDesc = $invDescription['invDescription'];
     $imgPath = $invDescription['imgPath'];
-    $invThumbnail = $invDescription['invThumbnail'];
+   // $invThumbnail = $invDescription['invThumbnail'];
     $invPrice = $invDescription['invPrice'];
     $invStock = $invDescription['invStock'];
     $invMiles = $invDescription['invMiles'];
@@ -160,13 +160,13 @@ switch ($action) {
     $invDescription = trim(filter_input(INPUT_POST, 'invDescription', FILTER_SANITIZE_STRING));
     //change invImg to imgPath
     $imgPath = trim(filter_input(INPUT_POST, 'imgPath', FILTER_SANITIZE_STRING));
-    $invThumbnail = trim(filter_input(INPUT_POST, 'invThumbnail', FILTER_SANITIZE_STRING));
+    //$invThumbnail = trim(filter_input(INPUT_POST, 'invThumbnail', FILTER_SANITIZE_STRING));
     $invPrice = trim(filter_input(INPUT_POST, 'invPrice', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION));
     $invStock = trim(filter_input(INPUT_POST, 'invStock', FILTER_SANITIZE_NUMBER_INT));
     $invMiles = trim(filter_input(INPUT_POST, 'invMiles', FILTER_SANITIZE_NUMBER_INT));
     $invColor = trim(filter_input(INPUT_POST, 'invColor', FILTER_SANITIZE_STRING));
     $classificationId = trim(filter_input(INPUT_POST, 'classificationId', FILTER_SANITIZE_NUMBER_INT));
-    $invId = trim(filter_input(INPUT_POST, 'invId', FILTER_SANITIZE_NUMBER_INT));
+    $invId = trim(filter_input(INPUT_POST, 'invId', FILTER_SANITIZE_STRING));
 
     if (
       empty($classificationId) || empty($invMake) || empty($invModel)

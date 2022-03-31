@@ -29,10 +29,11 @@
             ?>
             <!-- Searchbar -->
             <div class=search>
-                <form action='/phpmotors/searchbar/index.php/?action=search' name = "searchf" class="searchf"method="get">
-            <input type="text" placeholder="Search.." name="searchbar" aria-label="Search">
-            <button type="submit" value ="Search" class="searchbttn"> <i class="fa fa-search"> </i> </button>
+                <form action='/phpmotors/searchbar/index.php/?action=search' name = "searchf" class="searchf"method="post">
+                <input type="search" aria-label="Search Bar" class="form-control" name="keyword" value="" placeholder="Search here..." required=""/>
+					<button class="searchbttn" value="Search" name="search"> <i class="fa fa-search"> </i></button>
         </form>
             </div>
+            
         </div>
     </header>

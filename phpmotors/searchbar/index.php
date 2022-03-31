@@ -13,7 +13,7 @@ require_once '../model/accounts-model.php';
 // Get the uploads model
 require_once '../model/uploads-model.php';
  // Get the search file
-// require_once '../model/searchbar-model.php';
+require_once '../model/searchbar-model.php';
 // Get the functions file
 require_once '../library/functions.php';
 
@@ -30,16 +30,49 @@ if ($action == NULL){
 
 
 switch ($action){
-   case 'searchbar':
-    echo "<p> Searchbar</p>";
-    include '../view/search-results.php';
-   break;
-   case 'searchf':
-      echo "<p> SearchF</p>";
+   case 'search':
+ //the page goes here and then i get an error. 
+	if(ISSET($_POST['save'])){
+ 	
+ 
+ 
+		try{
+      $db = phpmotorsConnect();
+      $sql = 'SELECT * FROM inventory';
+      $stmt = $db->prepare($sql);
+    $stmt->execute();
+    $invInfo = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+		}catch(PDOException $e){
+			// Display error message
+		echo $e->getMessage();
+		}
+ 		//Closing the connection
+		$stmt->closeCursor();
+ 		//redirecting to the index page
+		header("location: /searchbar/index.php");
+      
+ 
+	}
+
+       //search
+   $search_keyword = '';
+   if(!empty($_POST['keyword'])) {
+     $search_keyword = $_POST['keyword'];
+     $results= probablybrokentoo($search_keyword);
+     if(!empty ($results)){
+    $resultList= buildtable($results,$search_keyword);
+   }
+   else {
+    $resultList="There are no results for the term $search_keyword.";
+  }
+  }
       include '../view/search-results.php';
+      break;
+ 
 default:
-   include '../view/search-results.php';
+//it currently loads the default page atm. 
+   include '../view/500.php';
    break;
    }
- 
-?>
+   ?>

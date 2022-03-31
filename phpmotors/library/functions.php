@@ -247,5 +247,45 @@ function resizeImage($old_image_path, $new_image_path, $max_width, $max_height) 
    imagedestroy($old_image);
  } // ends resizeImage function
 
- 
+ //build the pages
+ function page($results){
+    
+}
+ //build the table with results
+function buildtable($results){
+  
+  $resultList="Here are the results of your search:  </br>";
+  $resultList="<table>";
+  $resultList.="<thead>";
+  $resultList.="<tr>";
+  //$resultList.="<td>InvId</td>";
+  $resultList.="<td>InvMake</td>";
+  $resultList.="<td>InvModel</td>";
+  $resultList.="<td>InvDescription</td>";
+  $resultList.="<td>InvColor</td>";
+//$resultList.="<td>InvMiles</td>";
+ // $resultList.="<td>InvStock</td>";
+ // $resultList.="<td>InvPrice</td>";
+  $resultList.="</tr>";
+  $resultList.="</thead>";
+    $resultList.="</tbody>";
+  foreach ($results as $result ){
+    
+    $resultList.="<tr>";
+   // $resultList.="<td>$result[invId]</td>";
+    $resultList.="<td>$result[invMake]</td>";
+    $resultList.="<td>$result[invModel]</td>";
+    $resultList.="<td>$result[invDescription]</td>";
+    $resultList.="<td>$result[invColor]</td>";
+   // $resultList.="<td>$result[invMiles]</td>";
+   // $resultList.="<td>$result[invStock]</td>";
+   // $resultList.="<td>$result[invPrice]</td>";
+    $resultList.="</tr>";
+  }
+  $resultList.="</tbody>";
+ $resultList.= "</table>";
+ return $resultList;
+}
+
+
 ?>

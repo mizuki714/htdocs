@@ -13,6 +13,8 @@ require_once '../model/vehicles-model.php';
 require_once '../model/accounts-model.php';
 // Get the uploads model
 require_once '../model/uploads-model.php';
+// Get the searchbar model
+require_once '../model/searchbar-model.php';
 // Get the functions file
 require_once '../library/functions.php';
 
@@ -27,14 +29,10 @@ require_once '../library/functions.php';
  </nav>
  <main>
 <h1> Search Results </h1>
- <?php echo "Here are the results of your search: </br>";
- ?>
 <?php
- $searchbar= filter_input(INPUT_GET, 'searchbar', FILTER_SANITIZE_STRING); ?>
-<?php if(isset($searchbar)){
- echo $searchbar;
-}
-?>
+    echo $resultList;
+ ?>
+
 <p></p>
 
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/common/footer.php';?>
